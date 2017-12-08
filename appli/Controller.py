@@ -135,6 +135,7 @@ class Controller:
             self.ui.PauseButton.setEnabled(False)
             self.ui.InitButton.setEnabled(True)
             self.ui.PlaceBlocButton.setEnabled(True)
+            self.ui.ApplyModeButton.setEnabled(True)
             self.ui.Success(self.ui.n,self.ui.m,self.compteur)
         else: 
             self.Pause()

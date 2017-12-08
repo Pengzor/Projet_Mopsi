@@ -27,8 +27,8 @@ except AttributeError:
 class Ui_Dialog(object):
     
     def __init__(self, Dialog, appli, bloc):
-        self.n = 5
-        self.m = 5
+        self.n = 3
+        self.m = 3
         self.res = int(900/max(self.n, self.m))
         self.grid = grid(self.n,self.m)
         self.app = appli
@@ -305,8 +305,6 @@ class Ui_Dialog(object):
         self.label.raise_()
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-    ##listOperationsOptions = [val for (k, val) in self.listOperationsOptions.items()]
         
         self.PauseButton.setEnabled(False)
         self.SolveButton.setEnabled(False)
@@ -317,10 +315,10 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Puzzle Solver", None))
         self.label.setText(_translate("Dialog", "Settings", None))
         self.label_8.setText(_translate("Dialog", "Puzzle Size ", None))
-        # self.PuzzleSize.setItemText(0, _translate("Dialog", "3x3", None))
-        # self.PuzzleSize.setItemText(1, _translate("Dialog", "4x4", None))
-        self.PuzzleSize.setItemText(0, _translate("Dialog", "5x5", None))
-        # self.PuzzleSize.setItemText(3, _translate("Dialog", "6x6", None))
+        self.PuzzleSize.setItemText(0, _translate("Dialog", "3x3", None))
+        self.PuzzleSize.setItemText(1, _translate("Dialog", "4x4", None))
+        self.PuzzleSize.setItemText(2, _translate("Dialog", "5x5", None))
+        self.PuzzleSize.setItemText(3, _translate("Dialog", "6x6", None))
         self.PuzzleSize.setItemText(4, _translate("Dialog", "7x7", None))
         self.label_9.setText(_translate("Dialog", "Refresh Period ", None))
         self.RefreshPeriod.setItemText(0, _translate("Dialog", "10", None))
