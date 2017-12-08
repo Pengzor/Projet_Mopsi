@@ -190,6 +190,10 @@ class Ui_Dialog(object):
         self.UseMode.addItem(_fromUtf8(""))
         self.UseMode.addItem(_fromUtf8(""))
         
+        self.ApplyModeButton = QtGui.QPushButton("Apply")
+        # self.ApplyModeButton.setMaximumHeight(35)
+        # self.ApplyModeButton.setMaximumWidth(150)
+        
         
         ## Boutons
         
@@ -272,7 +276,14 @@ class Ui_Dialog(object):
         spacerItem = QtGui.QSpacerItem(20, 60, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem)        
         self.verticalLayout.addWidget(self.label_2)
-        self.verticalLayout.addWidget(self.UseMode)        
+        
+        self.horizontalLayout_usemode = QtGui.QHBoxLayout()
+        self.horizontalLayout_usemode.addWidget(self.UseMode)
+        self.horizontalLayout_usemode.addWidget(self.ApplyModeButton)
+        
+        
+        self.verticalLayout.addLayout(self.horizontalLayout_usemode)
+              
         self.verticalLayout.addWidget(self.InterfButton)
         spacerItem1 = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem1)   

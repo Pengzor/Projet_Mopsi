@@ -92,6 +92,7 @@ class PieceCreationWindow():
     def Ok(self):
         self.Update()
         self.main.pieces = self.pieces
+        self.ui.InterfButton.setEnabled(True)
         self.window.close()
         
         
@@ -198,7 +199,7 @@ class PieceCreationWindow():
         
         P = piece_default()
         P.mat= piece
-        P.col = self.col
+        P.color = self.col
         self.pieces.append(P)
         
         

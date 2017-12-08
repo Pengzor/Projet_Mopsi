@@ -14,7 +14,6 @@ class Controller:
         
         self.grid=grid
         self.bloc=bloc
-        self.pieces=pieces
         self.method= transform1
 
         self.T=100
@@ -31,8 +30,9 @@ class Controller:
         self.ui.ApplySizeButton.clicked.connect(self.SetSize)
         self.ui.ApplyPeriodButton.clicked.connect(self.SetPeriod)
         self.ui.ApplyMethodButton.clicked.connect(self.SetMethod)
+        self.ui.ApplyModeButton.clicked.connect(self.SetUse)
         # self.ui.ApplyMethodButton.clicked.connect(self.t)
-        self.ui.InterfButton.clicked.connect(self.CreatePieces)
+        self.SetUse()
     
     def AffichePiece(self, piece):
         n_p,m_p=piece.mat.shape
@@ -60,6 +60,7 @@ class Controller:
         self.ui.ApplySizeButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
         self.ui.ApplySizeButton.setEnabled(True)
+        self.ui.ApplyModeButton.setEnabled(True)
         self.compteur=0
         self.ui.CompteurLCD.display(0)
     
@@ -80,9 +81,9 @@ class Controller:
         self.AfficheBloc(self.bloc)
         self.grid.clear()
         
-        config_init(self.grid ,self.pieces, self.bloc)
+        config_init(self.grid ,self.ui.pieces, self.bloc)
         
-        for piece in self.pieces:
+        for piece in self.ui.pieces:
             self.AffichePiece(piece)
         
         self.ui.SolveButton.setEnabled(True)
@@ -90,6 +91,7 @@ class Controller:
         self.ui.PlaceBlocButton.setEnabled(True)
         self.ui.ApplySizeButton.setEnabled(False)
         self.ui.PlaceBlocButton.setEnabled(False)
+        self.ui.ApplyModeButton.setEnabled(False)
         self.ui.CompteurLCD.display(0)
         
         
@@ -115,18 +117,18 @@ class Controller:
             self.ui.CompteurLCD.display(self.compteur)
             self.compteur+=1
             
-            Pot = self.method(self.pieces,Pot, self.grid, self.bloc, self.compteur)
+            Pot = self.method(self.ui.pieces,Pot, self.grid, self.bloc, self.compteur)
             
             if (self.compteur%self.T==0): 
                 # time.sleep(0.1)
-                self.Refresh(self.pieces, self.bloc)
+                self.Refresh(self.ui.pieces, self.bloc)
                 self.ui.app.processEvents()
 
                 self.ui.Screen.resetMatrix()
                 self.ui.Screen.resetTransform()
                 self.ui.Screen.resetCachedContent()
          
-        self.Refresh(self.pieces, self.bloc)
+        self.Refresh(self.ui.pieces, self.bloc)
         self.ui.CompteurLCD.display(self.compteur)
         
         if Pot==0:
@@ -154,13 +156,15 @@ class Controller:
     def SetSize(self):
         self.ui.n=int(self.ui.PuzzleSize.currentText()[0])
         self.ui.m=int(self.ui.PuzzleSize.currentText()[-1])
-        self.pieces= pieces_default(self.ui.n, self.ui.m)
+        self.ui.pieces= pieces_default(self.ui.n, self.ui.m)
         self.grid = grid(self.ui.n,self.ui.m)
         self.ui.res = int(900/max(self.ui.n, self.ui.m))
         self.Reset()
         
     def CreatePieces(self):
         PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
+        
+        
         
         ##
         
@@ -170,16 +174,25 @@ class Controller:
         if self.ui.SolveMethod.currentText()=="2":
             self.method=transform2
 
+    def SetUse(self):
+        if self.ui.UseMode.currentText()=="Default":
+            self.ui.InterfButton.setEnabled(False)
+        elif self.ui.UseMode.currentText()=="Create own puzzle":
+            self.ui.InterfButton.setEnabled(True)
+            self.ui.InterfButton.clicked.connect(self.CreatePieces)
+        
+        elif self.ui.UseMode.currentText()=="Place puzzle pieces":
+            pass
     
     def Test(self):
 
         # print(self.grid.V())
         # 
         # 
-        # print(self.grid.V()+self.pieces[0].varV_permut(self.grid, self.pieces[1]))
-        # self.pieces[0].permut(self.grid, self.pieces[1])
-        # self.Refresh(self.pieces, self.bloc)
-        # self.grid.refresh(self.pieces, self.bloc)
+        # print(self.grid.V()+self.ui.pieces[0].varV_permut(self.grid, self.ui.pieces[1]))
+        # self.ui.pieces[0].permut(self.grid, self.ui.pieces[1])
+        # self.Refresh(self.ui.pieces, self.bloc)
+        # self.grid.refresh(self.ui.pieces, self.bloc)
         # 
         # 
         # # print(np.transpose(self.grid.mat))
@@ -187,8 +200,8 @@ class Controller:
         # print(' ')
         # 
         
-        self.pieces[0].rotate(self.grid)
-        self.Refresh(self.pieces, self.bloc)
+        self.ui.pieces[0].rotate(self.grid)
+        self.Refresh(self.ui.pieces, self.bloc)
 
 
     
