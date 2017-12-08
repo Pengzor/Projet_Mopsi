@@ -9,6 +9,19 @@ from code.Pieces import *
 liste_dep=['haut','bas','gauche','droite']
 
 def pieces_default(n,m):
+    if (n==3 and m==3):
+        PA = piece3a()
+        PB = piece3b()
+        PC = piece3c()
+        Pieces=[PA,PB,PC]
+        
+    if (n==4 and m==4):
+        PA = piece4a()
+        PB = piece4b()
+        PC = piece4c()
+        PD = piece4d()
+        Pieces=[PA,PB,PC,PD]
+        
     if (n==5 and m==5):
         PA = piece5a()
         PB = piece5b()
@@ -17,7 +30,19 @@ def pieces_default(n,m):
         PE = piece5e()
         PF = piece5f()
         Pieces=[PA,PB,PC,PD,PE,PF]
+        
+    if (n==6 and m==6):
+        PA=piece6a()
+        PC=piece6c()
+        PD=piece6d()
+        PE=piece6e()
+        PF=piece6f()
+        PG=piece6g()
+        PH=piece6h()
+        PI=piece6i()
+        Pieces=[PA,PC,PD,PE,PF,PG,PH,PI]
     
+        
     if (n==7 and m==7):
         PA=pieceA()
         PB=pieceB()
