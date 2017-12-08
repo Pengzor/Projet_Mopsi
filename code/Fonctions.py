@@ -57,6 +57,25 @@ def pieces_default(n,m):
     
     return Pieces
 
+def bloc_default(n,m):
+    if (n==3 and m==3):
+        B=bloc(0,1)
+        
+    if (n==4 and m==4):
+        B=bloc(2,1)
+        
+    if (n==5 and m==5):
+        B=bloc(2,1)
+        
+    if (n==6 and m==6):
+        B=bloc(2,0)
+        
+    if (n==7 and m==7):
+        B=bloc(2,1)
+
+    
+    return B
+    
 def remplissable(G,Pieces):  #Une condition nécessaire pour pouvoir résoudre le puzzle
     som= int(0)
     for piece in Pieces:
