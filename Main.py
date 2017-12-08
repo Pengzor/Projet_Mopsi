@@ -7,13 +7,7 @@ from code.Fonctions import *
 from appli.Screen import *
    
 
-
-
 B=bloc(2,1)
-
-
-
-
 
 
 QtGui.QApplication.setGraphicsSystem("raster")
