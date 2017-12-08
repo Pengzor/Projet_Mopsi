@@ -128,76 +128,6 @@ class piece5f(piece):
         
         
         
-##Pour le puzzle 7x7
-
-
-class pieceA(piece):
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(0,255,0)
-        self.mat=np.array([[1,0,0],[1,1,0],[0,1,1]])
-
-
-class pieceB(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(255,0,0)
-        self.mat=np.array([[1,1,1,1,1]])
-
-class pieceC(piece):
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(0,0,255)
-        self.mat=np.array([[0,1,1],[1,1,1],[0,1,1]])
-
-class pieceD(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(0,255,255)
-        self.mat=np.array([[1,0,0],[1,1,0],[1,1,1]])
-        
-class pieceE(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(255,255,0)
-        self.mat=np.array([[0,1],[1,1],[1,1],[0,1]])
-
-
-class pieceF(piece): 
-
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(255,0,255)
-        self.mat=np.array([[0,1],[1,1],[0,1],[0,1]])
-
-class pieceG(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(50,150,100)
-        self.mat=np.array([[0,1,1,0],[0,1,1,1],[1,1,1,0]])
-
-class pieceH(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(173,79,9)
-        self.mat=np.array([[0,1],[1,1],[0,1]])
-
-class pieceI(piece): 
-    
-    def __init__(self):
-        super().__init__()
-        self.color=QtGui.QColor(255,120,0)
-        self.mat=np.array([[1,1]])    
-        
-        
-        
 ##Pour le puzzle 6x6
 
 
@@ -251,11 +181,90 @@ class piece6h(piece):
     def __init__(self):
         super().__init__()
         self.color=QtGui.QColor(173,79,9)
-        self.mat=np.array([[0,1],[1,1],[0,1]])
+        self.mat=np.array([[0,1],[1,1]])
 
 class piece6i(piece): 
     
     def __init__(self):
         super().__init__()
         self.color=QtGui.QColor(255,120,0)
+        self.mat=np.array([[1,1]])
+        
+    
+    
+##Pour le puzzle 7x7
+
+
+class pieceA(piece):
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(0,255,0)
+        self.name='A'
+        self.mat=np.array([[1,0,0],[1,1,0],[0,1,1]])
+
+
+class pieceB(piece): ##
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(255,0,0)
+        self.name='B'
+        self.mat=np.array([[1,1,1,1,1]])
+
+class pieceC(piece):
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(0,0,255)
+        self.name='C'
+        self.mat=np.array([[0,1,1],[1,1,1],[0,1,1]])
+
+class pieceD(piece): ##
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(0,255,255)
+        self.name='D'
+        self.mat=np.array([[1,0,0],[1,1,0],[1,1,1]])
+        
+class pieceE(piece): 
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(255,255,0)
+        self.name='E'
+        self.mat=np.array([[0,1],[1,1],[1,1],[0,1]])
+
+
+class pieceF(piece): 
+
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(255,0,255)
+        self.name='F'
+        self.mat=np.array([[0,1],[1,1],[0,1],[0,1]])
+
+class pieceG(piece): 
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(50,150,100)
+        self.name='G'
+        self.mat=np.array([[0,1,1,0],[0,1,1,1],[1,1,1,0]])
+
+class pieceH(piece): 
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(173,79,9)
+        self.name='H'
+        self.mat=np.array([[0,1],[1,1],[0,1]])
+
+class pieceI(piece): 
+    
+    def __init__(self):
+        super().__init__()
+        self.color=QtGui.QColor(255,120,0)
+        self.name='I'
         self.mat=np.array([[1,1]])
