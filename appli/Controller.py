@@ -8,12 +8,11 @@ from appli.ScreenTer import *
 # from PyQt4 import QtCore, QtGui
   
 class Controller:
-    def __init__(self, ui, grid, bloc, pieces, n, m):
+    def __init__(self, ui):
         self.ui = ui
         self.continu=True	
         
-        self.grid=grid
-        self.bloc=bloc
+        self.grid=self.ui.grid
         self.method= transform1
 
         self.T=100
@@ -78,10 +77,10 @@ class Controller:
     def Init(self):
         self.compteur=0
         self.Clear()
-        self.AfficheBloc(self.bloc)
+        self.AfficheBloc(self.ui.bloc)
         self.grid.clear()
         
-        config_init(self.grid ,self.ui.pieces, self.bloc)
+        config_init(self.grid ,self.ui.pieces, self.ui.bloc)
         
         for piece in self.ui.pieces:
             self.AffichePiece(piece)
@@ -117,18 +116,18 @@ class Controller:
             self.ui.CompteurLCD.display(self.compteur)
             self.compteur+=1
             
-            Pot = self.method(self.ui.pieces,Pot, self.grid, self.bloc, self.compteur)
+            Pot = self.method(self.ui.pieces,Pot, self.grid, self.ui.bloc, self.compteur)
             
             if (self.compteur%self.T==0): 
                 # time.sleep(0.1)
-                self.Refresh(self.ui.pieces, self.bloc)
+                self.Refresh(self.ui.pieces, self.ui.bloc)
                 self.ui.app.processEvents()
 
                 self.ui.Screen.resetMatrix()
                 self.ui.Screen.resetTransform()
                 self.ui.Screen.resetCachedContent()
          
-        self.Refresh(self.ui.pieces, self.bloc)
+        self.Refresh(self.ui.pieces, self.ui.bloc)
         self.ui.CompteurLCD.display(self.compteur)
         
         if Pot==0:
@@ -158,6 +157,7 @@ class Controller:
         self.ui.n=int(self.ui.PuzzleSize.currentText()[0])
         self.ui.m=int(self.ui.PuzzleSize.currentText()[-1])
         self.ui.pieces= pieces_default(self.ui.n, self.ui.m)
+        self.ui.bloc=bloc_default(self.ui.n, self.ui.m)
         self.grid = grid(self.ui.n,self.ui.m)
         self.ui.res = int(900/max(self.ui.n, self.ui.m))
         self.Reset()
@@ -192,8 +192,8 @@ class Controller:
         # 
         # print(self.grid.V()+self.ui.pieces[0].varV_permut(self.grid, self.ui.pieces[1]))
         # self.ui.pieces[0].permut(self.grid, self.ui.pieces[1])
-        # self.Refresh(self.ui.pieces, self.bloc)
-        # self.grid.refresh(self.ui.pieces, self.bloc)
+        # self.Refresh(self.ui.pieces, self.ui.bloc)
+        # self.grid.refresh(self.ui.pieces, self.ui.bloc)
         # 
         # 
         # # print(np.transpose(self.grid.mat))
@@ -202,7 +202,7 @@ class Controller:
         # 
         
         self.ui.pieces[0].rotate(self.grid)
-        self.Refresh(self.ui.pieces, self.bloc)
+        self.Refresh(self.ui.pieces, self.ui.bloc)
 
 
     

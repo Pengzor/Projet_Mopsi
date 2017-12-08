@@ -26,7 +26,7 @@ except AttributeError:
 
 class Ui_Dialog(object):
     
-    def __init__(self, Dialog, appli, bloc):
+    def __init__(self, Dialog, appli):
         self.n = 3
         self.m = 3
         self.res = int(900/max(self.n, self.m))
@@ -34,9 +34,10 @@ class Ui_Dialog(object):
         self.app = appli
         self.pieces=pieces_default(self.n, self.m)
 
-        self.bloc = bloc
+        self.bloc = bloc_default(self.n, self.m)
+        
         self.setupUi(Dialog)
-        self.controller = Controller(self, self.grid, bloc, self.pieces, self.n, self.m)
+        self.controller = Controller(self)
         self.controller.bind()
 
         
