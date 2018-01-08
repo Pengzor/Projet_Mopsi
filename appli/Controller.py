@@ -4,6 +4,7 @@ os.chdir('C:\\Users\\teovi\\Documents\\IMI\\Projet MoPSi\\')
 from appli.Screen import *
 from appli.ScreenBis import *
 from appli.ScreenTer import *
+from appli.ScreenQuad import *
 
 # from PyQt4 import QtCore, QtGui
   
@@ -58,10 +59,13 @@ class Controller:
         self.ui.ResetButton.setEnabled(False)
         self.ui.ApplySizeButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
-        self.ui.ApplySizeButton.setEnabled(True)
         self.ui.ApplyModeButton.setEnabled(True)
+
         self.compteur=0
         self.ui.CompteurLCD.display(0)
+        
+        self.ui.pieces= self.ui.pieces+self.ui.fixedpieces
+        self.ui.fixedpieces=[]
     
     
     def Refresh(self, pieces, bloc= False):
@@ -80,9 +84,11 @@ class Controller:
         self.AfficheBloc(self.ui.bloc)
         self.grid.clear()
         
-        config_init(self.grid ,self.ui.pieces, self.ui.bloc)
+        config_init(self.grid ,self.ui.pieces, self.ui.fixedpieces, self.ui.bloc)
         
         for piece in self.ui.pieces:
+            self.AffichePiece(piece)
+        for piece in self.ui.fixedpieces:
             self.AffichePiece(piece)
         
         self.ui.SolveButton.setEnabled(True)
@@ -116,18 +122,18 @@ class Controller:
             self.ui.CompteurLCD.display(self.compteur)
             self.compteur+=1
             
-            Pot = self.method(self.ui.pieces,Pot, self.grid, self.ui.bloc, self.compteur)
+            Pot = self.method(self.ui.pieces, Pot, self.grid, self.ui.bloc, self.compteur, self.ui.fixedpieces)
             
             if (self.compteur%self.T==0): 
                 # time.sleep(0.1)
-                self.Refresh(self.ui.pieces, self.ui.bloc)
+                self.Refresh(self.ui.pieces+self.ui.fixedpieces, self.ui.bloc)
                 self.ui.app.processEvents()
 
                 self.ui.Screen.resetMatrix()
                 self.ui.Screen.resetTransform()
                 self.ui.Screen.resetCachedContent()
          
-        self.Refresh(self.ui.pieces, self.ui.bloc)
+        self.Refresh(self.ui.pieces+self.ui.fixedpieces, self.ui.bloc)
         self.ui.CompteurLCD.display(self.compteur)
         
         if Pot==0:
@@ -147,6 +153,8 @@ class Controller:
 
     def PlaceBloc(self):
         BlocPlacementWindow(self.ui, self.ui.n, self.ui.m)
+        self.Reset()
+        
 
 
     def SetPeriod(self):
@@ -164,6 +172,10 @@ class Controller:
         
     def CreatePieces(self):
         PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
+    
+    def PlacePieces(self):
+        self.Reset()
+        PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
         
         
         
@@ -183,27 +195,19 @@ class Controller:
             self.ui.InterfButton.clicked.connect(self.CreatePieces)
         
         elif self.ui.UseMode.currentText()=="Place puzzle pieces":
-            pass
+            self.ui.InterfButton.setEnabled(True)
+            self.ui.InterfButton.clicked.connect(self.PlacePieces)
+            
     
-    def Test(self):
-
-        # print(self.grid.V())
-        # 
-        # 
-        # print(self.grid.V()+self.ui.pieces[0].varV_permut(self.grid, self.ui.pieces[1]))
-        # self.ui.pieces[0].permut(self.grid, self.ui.pieces[1])
-        # self.Refresh(self.ui.pieces, self.ui.bloc)
-        # self.grid.refresh(self.ui.pieces, self.ui.bloc)
-        # 
-        # 
-        # # print(np.transpose(self.grid.mat))
-        # print('potentiel', self.grid.V())
-        # print(' ')
-        # 
+    def AffichePlaced(self):
+        self.Clear()
+        for piece in self.ui.fixedpieces:
+            self.AffichePiece(piece)
+        self.AfficheBloc(self.ui.bloc)
+        # self.ui.PlaceBlocButton.setEnabled(False)
+        self.ui.InterfButton.setEnabled(False)
         
-        self.ui.pieces[0].rotate(self.grid)
-        self.Refresh(self.ui.pieces, self.ui.bloc)
-
+        self.ui.ApplyModeButton.setEnabled(False)
 
     
         

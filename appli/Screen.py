@@ -33,13 +33,14 @@ class Ui_Dialog(object):
         self.grid = grid(self.n,self.m)
         self.app = appli
         self.pieces=pieces_default(self.n, self.m)
+        self.fixedpieces=[]
 
         self.bloc = bloc_default(self.n, self.m)
         
         self.setupUi(Dialog)
         self.controller = Controller(self)
         self.controller.bind()
-
+        
         
     def setupUi(self, Dialog):
           
