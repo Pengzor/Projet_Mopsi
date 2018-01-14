@@ -59,7 +59,7 @@ def pieces_default(n,m):
 
 def bloc_default(n,m):
     if (n==3 and m==3):
-        B=bloc(0,1)
+        B=bloc(0,0)
         
     if (n==4 and m==4):
         B=bloc(2,1)
@@ -83,11 +83,13 @@ def remplissable(G,Pieces):  #Une condition nécessaire pour pouvoir résoudre l
     return som==(G.n*G.m) - 1
 
 
-def config_init(G,Pieces, Bloc= False):
+def config_init(G,Pieces, fixedPieces, Bloc= False):
     for piece in Pieces:
         ip,jp=piece.mat.shape
         piece.x=random.randint(0,G.n-ip)
         piece.y=random.randint(0,G.m-jp)
+        G.add_piece(piece)
+    for piece in fixedPieces:
         G.add_piece(piece)
     
     if (not Bloc):
@@ -107,7 +109,7 @@ def loi(t, dP):
     return random.random() < crit
 
 
-def transform1(Pieces, Pot, G, bloc, t):
+def transform1(Pieces, Pot, G, bloc, t, fixedPieces):
 
     dep=random.randint(0,3)
     index=random.randint(0,len(Pieces)-1)
@@ -119,20 +121,20 @@ def transform1(Pieces, Pot, G, bloc, t):
     if dPot1<=0 or loi(t,dPot1):
         P.move(liste_dep[dep], G)
         Pot+=dPot1
-        G.refresh(Pieces,bloc)
+        G.refresh(Pieces+fixedPieces,bloc)
      
     if P.rotate_possible(G):
         dPot2=P.varV_rotate(G)
         if dPot2<=0 or loi(t,dPot2):
             P.rotate(G)
             Pot+=dPot2
-            G.refresh(Pieces,bloc)
+            G.refresh(Pieces+fixedPieces,bloc)
 
     return int(Pot)
 
 
-def transform2(Pieces, Pot, G, bloc, t):
-
+def transform2(Pieces, Pot, G, bloc, t, fixedPieces):
+    
     dep=random.randint(0,3)
     index=random.randint(0,len(Pieces)-1)
     P=Pieces[index]
@@ -143,7 +145,7 @@ def transform2(Pieces, Pot, G, bloc, t):
     if dPot<=0 or loi(t,dPot):
         P.move(liste_dep[dep], G)
         Pot+=dPot
-        G.refresh(Pieces,bloc)
+        G.refresh(Pieces+fixedPieces,bloc)
         
         
     i1=random.randint(0,len(Pieces)-1)
@@ -161,13 +163,13 @@ def transform2(Pieces, Pot, G, bloc, t):
     if dPot1<=0 or loi(t,dPot1):
         P.permut(G, Q)
         Pot+=dPot1
-        G.refresh(Pieces,bloc)
+        G.refresh(Pieces+fixedPieces,bloc)
      
     if P.rotate_possible(G):
         dPot2=P.varV_rotate(G)
         if dPot2<=0 or loi(t,dPot2):
             P.rotate(G)
             Pot+=dPot2
-            G.refresh(Pieces,bloc)
+            G.refresh(Pieces+fixedPieces,bloc)
         
     return int(Pot)

@@ -79,10 +79,7 @@ class piece:
     def __init__(self):
         pass
     
-    # def __init__(self, mat, col):
-    #     self.mat = mat
-    #     self.col = col
-        
+
     def __str__(self):
         return self.name
         
@@ -141,12 +138,20 @@ class piece:
     def rotate(self, grid): #Tourne la pièce d'un quart dans le sens horaire
         x,y=self.mat.shape
         newM= np.zeros((y,x))
-        
         if self.rotate_possible(grid):
             for i in range(y):
                 for j in range(x):
                     newM[i,j]=self.mat[-(j+1),i]
             self.mat=newM
+        return True
+    
+    def rotate_(self): #Tourne la pièce d'un quart dans le sens horaire
+        x,y=self.mat.shape
+        newM= np.zeros((y,x))
+        for i in range(y):
+            for j in range(x):
+                newM[i,j]=self.mat[-(j+1),i]
+        self.mat=newM
         return True
     
     

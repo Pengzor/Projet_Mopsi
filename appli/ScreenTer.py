@@ -71,7 +71,7 @@ class PieceCreationWindow():
         self.mainPanel.addLayout(self.lowerPanel)
 
         self.window.setLayout(self.mainPanel)
-        self.window.setWindowTitle('Place Creation')
+        self.window.setWindowTitle('Piece Creation')
         self.window.show()
 
         self.buttonClear.clicked.connect(self.Clear)
@@ -92,7 +92,6 @@ class PieceCreationWindow():
     def Ok(self):
         self.Update()
         self.main.pieces = self.pieces
-        self.ui.InterfButton.setEnabled(True)
         self.window.close()
         
         
@@ -119,9 +118,9 @@ class PieceCreationWindow():
     
     
     def SetNewCol(self):
-        a = random.randint(50,255)
-        b = random.randint(50,255)
-        c = random.randint(50,255)
+        a = random.randint(150,255)
+        b = random.randint(150,255)
+        c = random.randint(150,255)
         self.col = QtGui.QColor(a,b,c)
         
         
@@ -220,7 +219,7 @@ class PieceCreationWindow():
         
     def DrawRect(self,x ,y, col):
         pen = QtGui.QPen()
-        col1= QtGui.QColor(40,40,40)
+        col1= QtGui.QColor(100,100,100)
         gradient = QtGui.QRadialGradient(x*self.res + self.res/2,y*self.res + self.res/2, 1.3*self.res,x*self.res + self.res/2, y*self.res + self.res/2)
         gradient.setColorAt(0, col)
         gradient.setColorAt(1, col1)
