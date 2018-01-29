@@ -1,0 +1,11 @@
+#Caches
+appli/__pycache__/
+codes/__pycache__/
+
+#Fichiers temporaires de communication python-C++
+codes/DonneesPuzzle.txt
+codes/ResultatInfos.csv
+codes/ResultatPuzzle.csv
+
+#Librairies
+codes/*.dll
