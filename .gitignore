@@ -9,3 +9,6 @@ codes/ResultatPuzzle.csv
 
 #Librairies
 codes/*.dll
+
+#Fichier perso de développement/test
+codes/communication.py
