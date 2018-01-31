@@ -23,6 +23,8 @@ class Controller:
         #variables of state
         self.blocPlaced = False
         self.puzzleInitialized = False
+        self.piecesAlreadyPlaced = False
+        self.UpdateState()
 
     def bind(self):
         self.ui.InitButton.clicked.connect(self.Init)
@@ -61,8 +63,11 @@ class Controller:
         self.grid.clear()
         self.ui.ResetButton.setEnabled(False)
         self.ui.ApplySizeButton.setEnabled(True)
+        self.ui.ApplyPeriodButton.setEnabled(True)
+        self.ui.ApplyMethodButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
-        self.ui.ApplyModeButton.setEnabled(True)
+        self.ui.ApplyModeButton.setEnabled(False)
+        self.ui.InterfButton.setEnabled(False)
 
         self.compteur=0
         self.ui.CompteurLCD.display(0)
@@ -73,7 +78,10 @@ class Controller:
         #state variables
         self.blocPlaced = False
         self.puzzleInitialized = False
-    
+        self.piecesAlreadyPlaced = False
+        self.UpdateState()
+        
+        self.ui.app.processEvents()
     
     def Refresh(self, pieces, bloc= False):
         self.Clear()
@@ -114,6 +122,7 @@ class Controller:
         self.ui.PauseButton.setEnabled(False)
         self.ui.InitButton.setEnabled(True)
         self.ui.SolveButton.setEnabled(True)
+        print('Pause')
     
     
     def Solve(self):
@@ -157,8 +166,16 @@ class Controller:
             else: 
                 self.Pause()
         
+            self.ui.ResetButton.setEnabled(True)
+            self.ui.ApplyPeriodButton.setEnabled(True)
+            self.ui.ApplyMethodButton.setEnabled(True)
+        
         #---Algorithme exhaustif---
         elif (self.method==transformExhaustive):
+            
+            #momentarily disable buttons
+            self.ui.DisableAll()
+            
             #solutions to display
             #--Rq : always 1 single fixed square
             numFixedPieces = []
@@ -169,34 +186,25 @@ class Controller:
             
             #if success
             if len(setSolutions) > 0:
-                self.ui.PauseButton.setEnabled(False)
-                self.ui.InitButton.setEnabled(True)
-                self.ui.PlaceBlocButton.setEnabled(True)
-                self.ui.ApplyModeButton.setEnabled(True)
                 self.ui.SuccessExhaustive(len(setSolutions), self.ui.n, self.ui.m)
+                #display all solutions
+                for i in range(0, len(setSolutions)):
+                    self.compteur += 1
+                    self.Refresh(setSolutions[i]+self.ui.fixedpieces, self.ui.bloc)
+                    self.ui.CompteurLCD.display(self.compteur)
+                    self.ui.app.processEvents()
+                    self.ui.Screen.resetMatrix()
+                    self.ui.Screen.resetTransform()
+                    self.ui.Screen.resetCachedContent()
+                    time.sleep(1)
+                #re-enable buttons
+                self.ui.ReEnableAll()
             else: 
                 self.Reset()
                 self.ui.FailureExhaustive()
-            
-            #display all solutions
-            for i in range(0, len(setSolutions)):
-                self.compteur += 1
-                self.Refresh(setSolutions[i]+self.ui.fixedpieces, self.ui.bloc)
-                self.ui.CompteurLCD.display(self.compteur)
-                self.ui.app.processEvents()
-                self.ui.Screen.resetMatrix()
-                self.ui.Screen.resetTransform()
-                self.ui.Screen.resetCachedContent()
-                time.sleep(1)
-
-        self.ui.ResetButton.setEnabled(True)
-        self.ui.ApplyPeriodButton.setEnabled(True)
-        self.ui.ApplyMethodButton.setEnabled(True)
-
 
     def PlaceBloc(self):
         BlocPlacementWindow(self)
-        self.Reset()
         #self.UpdateState()   -> in the 'BlocPlacementWindow' function
 
 
@@ -217,7 +225,7 @@ class Controller:
         PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
     
     def PlacePieces(self):
-        self.Reset()
+        #self.Reset()
         PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
         
         
@@ -227,10 +235,13 @@ class Controller:
     def SetMethod(self):
         if self.ui.SolveMethod.currentText()=="1":
             self.method=transform1
+            self.ui.ApplyPeriodButton.setEnabled(True)
         elif self.ui.SolveMethod.currentText()=="2":
             self.method=transform2
+            self.ui.ApplyPeriodButton.setEnabled(True)
         elif self.ui.SolveMethod.currentText()=="Exhaustive":
             self.method=transformExhaustive
+            self.ui.ApplyPeriodButton.setEnabled(False)
         self.UpdateState()
 
     def SetUse(self):
@@ -258,15 +269,36 @@ class Controller:
     def UpdateState(self):
         if (self.blocPlaced and self.puzzleInitialized):
             self.ui.SolveButton.setEnabled(True)
+            self.ui.ApplySizeButton.setEnabled(False)
         elif (self.blocPlaced and self.method == transformExhaustive):
             self.ui.SolveButton.setEnabled(True)
             self.ui.InitButton.setEnabled(False)
+            self.ui.ApplyPeriodButton.setEnabled(False)
+            self.ui.ApplySizeButton.setEnabled(False)
         elif (self.method == transformExhaustive):
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(False)
+            self.ui.ApplyPeriodButton.setEnabled(False)
         else:
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(True)
+        
+        if (self.piecesAlreadyPlaced):
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(False)
+        elif (self.puzzleInitialized):
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(False)
+        elif (self.blocPlaced):
+            self.ui.ApplyModeButton.setEnabled(True)
+            self.ui.PlaceBlocButton.setEnabled(True)
+        else:
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(True)
+        
+        self.ui.ResetButton.setEnabled(True)
+        
+        self.ui.app.processEvents()
 
 
 

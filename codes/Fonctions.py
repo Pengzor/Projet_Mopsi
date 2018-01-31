@@ -265,9 +265,9 @@ def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
         x,y = tabPiece.shape
         f.write(str(x) + ';' + str(y) + '\n')
         for k in range(0, x):
-            f.write(str(tabPiece[k][0]))
+            f.write(str(int(tabPiece[k][0])))
             for l in range(1, y):
-                f.write(';' + str(tabPiece[k][l]))
+                f.write(';' + str(int(tabPiece[k][l])))
             f.write('\n')
         f.write('\n')
         
@@ -306,6 +306,7 @@ def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
     
     #Process the solutions into sets of pieces
     setSolutions = []
+    
     for i in range(0, len(listSolutions)):
         sol = listSolutions[i]
         solPieces = []

@@ -396,4 +396,22 @@ class Ui_Dialog(object):
         brush = QtGui.QBrush(gradient)
 
         self.Scene.addEllipse( self.res*x + self.res/4, self.res * y + self.res/4, self.res/2, self.res/2, pen , brush)
+    
+    def DisableAll(self):
+        #Disable all buttons while trying to calculate in the executable
+        self.ApplySizeButton.setEnabled(False)
+        self.ApplyPeriodButton.setEnabled(False)
+        self.ApplyMethodButton.setEnabled(False)
+        self.ApplyModeButton.setEnabled(False)
+        self.PlaceBlocButton.setEnabled(False)
+        self.InitButton.setEnabled(False)
+        self.ResetButton.setEnabled(False)
+        self.PauseButton.setEnabled(False)
         
+        self.app.processEvents()
+    
+    def ReEnableAll(self):
+        #Enable again all buttons after the exhaustive calcul
+        self.ResetButton.setEnabled(True)
+        
+        self.app.processEvents()
