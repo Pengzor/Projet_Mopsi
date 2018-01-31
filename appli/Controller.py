@@ -267,12 +267,16 @@ class Controller:
     def UpdateState(self):
         if (self.blocPlaced and self.puzzleInitialized):
             self.ui.SolveButton.setEnabled(True)
+            self.ui.ApplySizeButton.setEnabled(False)
         elif (self.blocPlaced and self.method == transformExhaustive):
             self.ui.SolveButton.setEnabled(True)
             self.ui.InitButton.setEnabled(False)
+            self.ui.ApplyPeriodButton.setEnabled(False)
+            self.ui.ApplySizeButton.setEnabled(False)
         elif (self.method == transformExhaustive):
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(False)
+            self.ui.ApplyPeriodButton.setEnabled(False)
         else:
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(True)
