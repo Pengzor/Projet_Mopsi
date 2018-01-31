@@ -2,7 +2,7 @@ import os
 import csv
 import numpy as np
 import copy
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 from codes.Pieces import *
 
@@ -247,7 +247,7 @@ def findPosition(solPiece, sizeGrid):
     return i0, j0, solPiece
 
 def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
-    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet\\codes')
+    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2\\codes')
     
     #Writing the data
     f = open("DonneesPuzzle.txt", "w")
@@ -302,7 +302,7 @@ def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
     
     f.close()
     
-    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
     
     #Process the solutions into sets of pieces
     setSolutions = []
