@@ -233,10 +233,13 @@ class Controller:
     def SetMethod(self):
         if self.ui.SolveMethod.currentText()=="1":
             self.method=transform1
+            self.ui.ApplyPeriodButton.setEnabled(True)
         elif self.ui.SolveMethod.currentText()=="2":
             self.method=transform2
+            self.ui.ApplyPeriodButton.setEnabled(True)
         elif self.ui.SolveMethod.currentText()=="Exhaustive":
             self.method=transformExhaustive
+            self.ui.ApplyPeriodButton.setEnabled(False)
         self.UpdateState()
 
     def SetUse(self):
