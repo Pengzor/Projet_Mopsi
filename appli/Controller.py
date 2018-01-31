@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 from appli.Screen import *
 from appli.ScreenBis import *
@@ -62,6 +62,8 @@ class Controller:
         self.grid.clear()
         self.ui.ResetButton.setEnabled(False)
         self.ui.ApplySizeButton.setEnabled(True)
+        self.ui.ApplyPeriodButton.setEnabled(True)
+        self.ui.ApplyMethodButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
         self.ui.ApplyModeButton.setEnabled(True)
 
@@ -74,7 +76,9 @@ class Controller:
         #state variables
         self.blocPlaced = False
         self.puzzleInitialized = False
-    
+        self.UpdateState()
+        
+        self.ui.app.processEvents()
     
     def Refresh(self, pieces, bloc= False):
         self.Clear()
@@ -115,6 +119,7 @@ class Controller:
         self.ui.PauseButton.setEnabled(False)
         self.ui.InitButton.setEnabled(True)
         self.ui.SolveButton.setEnabled(True)
+        print('Pause')
     
     
     def Solve(self):
@@ -158,8 +163,16 @@ class Controller:
             else: 
                 self.Pause()
         
+            self.ui.ResetButton.setEnabled(True)
+            self.ui.ApplyPeriodButton.setEnabled(True)
+            self.ui.ApplyMethodButton.setEnabled(True)
+        
         #---Algorithme exhaustif---
         elif (self.method==transformExhaustive):
+            
+            #momentarily disable buttons
+            self.ui.DisableAll()
+            
             #solutions to display
             #--Rq : always 1 single fixed square
             numFixedPieces = []
@@ -170,31 +183,22 @@ class Controller:
             
             #if success
             if len(setSolutions) > 0:
-                self.ui.PauseButton.setEnabled(False)
-                self.ui.InitButton.setEnabled(True)
-                self.ui.PlaceBlocButton.setEnabled(True)
-                self.ui.ApplyModeButton.setEnabled(True)
                 self.ui.SuccessExhaustive(len(setSolutions), self.ui.n, self.ui.m)
+                #display all solutions
+                for i in range(0, len(setSolutions)):
+                    self.compteur += 1
+                    self.Refresh(setSolutions[i]+self.ui.fixedpieces, self.ui.bloc)
+                    self.ui.CompteurLCD.display(self.compteur)
+                    self.ui.app.processEvents()
+                    self.ui.Screen.resetMatrix()
+                    self.ui.Screen.resetTransform()
+                    self.ui.Screen.resetCachedContent()
+                    time.sleep(1)
+                #re-enable buttons
+                self.ui.ReEnableAll()
             else: 
                 self.Reset()
                 self.ui.FailureExhaustive()
-            
-            #display all solutions
-            for i in range(0, len(setSolutions)):
-                self.compteur += 1
-                self.Refresh(setSolutions[i]+self.ui.fixedpieces, self.ui.bloc)
-                self.ui.CompteurLCD.display(self.compteur)
-                self.ui.app.processEvents()
-                self.ui.Screen.resetMatrix()
-                self.ui.Screen.resetTransform()
-                self.ui.Screen.resetCachedContent()
-                time.sleep(1)
-
-
-        self.ui.ResetButton.setEnabled(True)
-        self.ui.ApplyPeriodButton.setEnabled(True)
-        self.ui.ApplyMethodButton.setEnabled(True)
-
 
     def PlaceBloc(self):
         BlocPlacementWindow(self)
@@ -269,6 +273,8 @@ class Controller:
         else:
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(True)
+        
+        self.ui.app.processEvents()
 
 
 

@@ -1,7 +1,7 @@
 import os
 import sys
 
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 from codes.Fonctions import *
 from appli.Screen import *

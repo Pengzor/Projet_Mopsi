@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 
 from PyQt4 import QtGui, QtCore

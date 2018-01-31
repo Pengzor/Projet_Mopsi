@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import sys
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 from codes.Fonctions import *
 
 res=100
