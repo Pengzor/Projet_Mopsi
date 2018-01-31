@@ -23,6 +23,8 @@ class Controller:
         #variables of state
         self.blocPlaced = False
         self.puzzleInitialized = False
+        self.piecesAlreadyPlaced = False
+        self.UpdateState()
         
 
     def bind(self):
@@ -65,7 +67,8 @@ class Controller:
         self.ui.ApplyPeriodButton.setEnabled(True)
         self.ui.ApplyMethodButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
-        self.ui.ApplyModeButton.setEnabled(True)
+        self.ui.ApplyModeButton.setEnabled(False)
+        self.ui.InterfButton.setEnabled(False)
 
         self.compteur=0
         self.ui.CompteurLCD.display(0)
@@ -76,6 +79,7 @@ class Controller:
         #state variables
         self.blocPlaced = False
         self.puzzleInitialized = False
+        self.piecesAlreadyPlaced = False
         self.UpdateState()
         
         self.ui.app.processEvents()
@@ -202,7 +206,6 @@ class Controller:
 
     def PlaceBloc(self):
         BlocPlacementWindow(self)
-        self.Reset()
         #self.UpdateState()   -> in the 'BlocPlacementWindow' function
 
 
@@ -223,7 +226,7 @@ class Controller:
         PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
     
     def PlacePieces(self):
-        self.Reset()
+        #self.Reset()
         PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
         
         
@@ -280,6 +283,21 @@ class Controller:
         else:
             self.ui.SolveButton.setEnabled(False)
             self.ui.InitButton.setEnabled(True)
+        
+        if (self.piecesAlreadyPlaced):
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(False)
+        elif (self.puzzleInitialized):
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(False)
+        elif (self.blocPlaced):
+            self.ui.ApplyModeButton.setEnabled(True)
+            self.ui.PlaceBlocButton.setEnabled(True)
+        else:
+            self.ui.ApplyModeButton.setEnabled(False)
+            self.ui.PlaceBlocButton.setEnabled(True)
+        
+        self.ui.ResetButton.setEnabled(True)
         
         self.ui.app.processEvents()
 

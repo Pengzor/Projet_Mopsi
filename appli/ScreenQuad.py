@@ -298,6 +298,10 @@ class PiecePlacementWindow():
                 self.main.pieces.remove(piece)
         
         self.main.controller.AffichePlaced()
+        
+        self.main.controller.piecesAlreadyPlaced = True
+        self.main.controller.UpdateState()
+        
         self.window.close()
         
         
