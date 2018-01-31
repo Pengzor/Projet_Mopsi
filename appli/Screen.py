@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 from codes.Classes import *
 from codes.Fonctions import *
 from codes.Pieces import *

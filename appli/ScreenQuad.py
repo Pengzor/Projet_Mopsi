@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 
 from PyQt4 import QtGui, QtCore
@@ -7,7 +7,6 @@ from PyQt4 import QtGui, QtCore
 # import random
 # import numpy as np
 from codes.Classes import *
-
 from codes.Pieces import *
 
 class PiecePlacementWindow():        
@@ -65,16 +64,12 @@ class PiecePlacementWindow():
         self.lowerPanel.addWidget(self.buttonReset)
         self.lowerPanel.addWidget(self.buttonAddpiece)
         self.lowerPanel.addWidget(self.buttonOk)
-        
         self.midPanel=QtGui.QHBoxLayout()
         self.leftPanel = QtGui.QVBoxLayout()
         self.Screen.mousePressEvent = self.getPos
         # self.leftPanel.addWidget(self.label)
         self.leftPanel.addWidget(self.Screen)
         
-
-        
-  
         self.PiecePanel=QtGui.QHBoxLayout()
         self.PieceList = QtGui.QComboBox()
         self.PieceList.setMinimumHeight(43)
@@ -204,7 +199,7 @@ class PiecePlacementWindow():
                     if [x+i,y+j] in self.occupied :
                         self.Error(0)
                         return False
-        if n+x>G.n or m+y>G.m:
+        if n+x>self.n or m+y>self.m:
             self.Error(1)
             return False
         return True

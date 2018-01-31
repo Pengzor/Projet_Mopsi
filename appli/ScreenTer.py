@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 
 from PyQt4 import QtGui, QtCore
@@ -7,7 +7,6 @@ from PyQt4 import QtGui, QtCore
 # import random
 # import numpy as np
 from codes.Classes import *
-
 from codes.Pieces import *
 
 class PieceCreationWindow():        

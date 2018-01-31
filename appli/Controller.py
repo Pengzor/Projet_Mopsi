@@ -1,5 +1,5 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet')
+os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
 
 from appli.Screen import *
 from appli.ScreenBis import *
@@ -23,7 +23,6 @@ class Controller:
         #variables of state
         self.blocPlaced = False
         self.puzzleInitialized = False
-        
 
     def bind(self):
         self.ui.InitButton.clicked.connect(self.Init)
@@ -189,7 +188,6 @@ class Controller:
                 self.ui.Screen.resetTransform()
                 self.ui.Screen.resetCachedContent()
                 time.sleep(1)
-
 
         self.ui.ResetButton.setEnabled(True)
         self.ui.ApplyPeriodButton.setEnabled(True)
