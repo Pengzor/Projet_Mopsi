@@ -101,9 +101,13 @@ def config_init(G,Pieces, fixedPieces, Bloc= False):
         G.add_bloc(Bloc)
 
 
-def beta(t):
-    b = 1.3
-    a = 0.05
+def beta(t,n):
+    if n<=7:
+        a=0.1
+        b=0.9
+    if n==7:
+        b = 1
+        a = 0.06
     return b*pow(t,a)
 
 
