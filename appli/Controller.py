@@ -72,7 +72,7 @@ class Controller:
         self.compteur=0
         self.ui.CompteurLCD.display(0)
         
-        self.ui.pieces= self.ui.pieces+self.ui.fixedpieces
+        self.ui.pieces = pieces_default(self.ui.n, self.ui.m)
         self.ui.fixedpieces=[]
         
         #state variables
@@ -178,11 +178,17 @@ class Controller:
             
             #solutions to display
             #--Rq : always 1 single fixed square
-            numFixedPieces = []
-            for i in range(0, len(self.ui.fixedpieces)):
-                numFixedPieces.append(self.ui.fixedpieces[i].y * self.grid.n + self.ui.fixedpieces[i].x + 1)
-            numFixedPieces.append(self.ui.bloc.y * self.grid.n + self.ui.bloc.x + 1)
-            setSolutions = self.method(self.grid.n, numFixedPieces, self.ui.pieces)
+            numFixedSquares = []
+            for fixedPiece in self.ui.fixedpieces:
+                fixedMat = fixedPiece.mat
+                fixedN, fixedM = fixedMat.shape
+                xf, yf = fixedPiece.x, fixedPiece.y
+                for iFix in range(0, fixedN):
+                    for jFix in range(0, fixedM):
+                        if fixedMat[iFix][jFix] == 1:
+                            numFixedSquares.append((yf + jFix)*self.grid.n + xf + iFix + 1)
+            numFixedSquares.append(self.ui.bloc.y * self.grid.n + self.ui.bloc.x + 1)
+            setSolutions = self.method(self.grid.n, numFixedSquares, self.ui.pieces)
             
             #if success
             if len(setSolutions) > 0:
