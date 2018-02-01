@@ -291,7 +291,7 @@ class PiecePlacementWindow():
         for piece in self.main.pieces:
             if piece in self.placedpieces:
                 self.main.pieces.remove(piece)
-        
+                
         self.main.controller.AffichePlaced()
         
         self.main.controller.piecesAlreadyPlaced = True
