@@ -1,13 +1,13 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+import inspect
 
+path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+os.chdir(path)
 
+from Pieces import *
 from PyQt4 import QtGui, QtCore
-# import sys
-# import random
-# import numpy as np
-from codes.Classes import *
-from codes.Pieces import *
+import numpy as np
+import random
 
 class PieceCreationWindow():        
     def __init__(self, main, n, m):
@@ -57,7 +57,7 @@ class PieceCreationWindow():
         self.Compteur.setDigitCount(8)
         self.Compteur.setMaximumHeight(50)
         
-        self.label = QtGui.QLabel("Select bloc position :")
+        self.label = QtGui.QLabel("Draw piece :")
         self.label.setFont(font)
         self.lowerPanel.addWidget(self.buttonClear)
         self.lowerPanel.addWidget(self.buttonAddpiece)

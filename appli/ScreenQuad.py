@@ -1,13 +1,5 @@
-import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
-
-
 from PyQt4 import QtGui, QtCore
-# import sys
-# import random
-# import numpy as np
-from codes.Classes import *
-from codes.Pieces import *
+import numpy as np
 
 class PiecePlacementWindow():        
     def __init__(self, main, n, m):
@@ -287,11 +279,14 @@ class PiecePlacementWindow():
         
     def Ok(self):
         self.main.fixedpieces= self.placedpieces
+        
 
-        for piece in self.main.pieces:
-            if piece in self.placedpieces:
+        for piece in self.placedpieces:
+            if piece in self.main.pieces:
                 self.main.pieces.remove(piece)
                 
+        # print(self.main.fixedpieces)
+        # print(self.main.pieces)
         self.main.controller.AffichePlaced()
         
         self.main.controller.piecesAlreadyPlaced = True

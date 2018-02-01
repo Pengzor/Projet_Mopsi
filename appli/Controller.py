@@ -1,5 +1,7 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+import inspect
+path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+os.chdir(path)
 
 from appli.Screen import *
 from appli.ScreenBis import *
@@ -21,7 +23,7 @@ class Controller:
         self.compteur=0
         
         #variables of state
-        self.blocPlaced = False
+        self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
@@ -76,7 +78,7 @@ class Controller:
         self.ui.fixedpieces=[]
         
         #state variables
-        self.blocPlaced = False
+        self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
@@ -122,7 +124,7 @@ class Controller:
         self.ui.PauseButton.setEnabled(False)
         self.ui.InitButton.setEnabled(True)
         self.ui.SolveButton.setEnabled(True)
-        print('Pause')
+        # print('Pause')
     
     
     def Solve(self):
