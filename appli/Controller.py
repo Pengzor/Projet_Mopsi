@@ -124,7 +124,7 @@ class Controller:
         self.ui.PauseButton.setEnabled(False)
         self.ui.InitButton.setEnabled(True)
         self.ui.SolveButton.setEnabled(True)
-        print('Pause')
+        # print('Pause')
     
     
     def Solve(self):

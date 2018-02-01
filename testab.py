@@ -1,5 +1,6 @@
 import os
 import sys
+import inspect
 
 os.chdir('C:\\Users\\teovi\\Documents\\IMI\\Projet MoPSi\\')
 

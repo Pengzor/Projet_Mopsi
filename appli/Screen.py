@@ -144,6 +144,7 @@ class Ui_Dialog(object):
         self.RefreshPeriod.addItem(_fromUtf8(""))
         self.RefreshPeriod.addItem(_fromUtf8(""))
         self.RefreshPeriod.addItem(_fromUtf8(""))
+        self.RefreshPeriod.addItem(_fromUtf8(""))
         self.RefreshPeriod.setMinimumWidth(90)
         
         self.ApplyPeriodButton = QtGui.QPushButton("Apply")

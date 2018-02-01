@@ -279,10 +279,14 @@ class PiecePlacementWindow():
         
     def Ok(self):
         self.main.fixedpieces= self.placedpieces
+        
 
-        for piece in self.main.pieces:
-            if piece in self.placedpieces:
+        for piece in self.placedpieces:
+            if piece in self.main.pieces:
                 self.main.pieces.remove(piece)
+                
+        # print(self.main.fixedpieces)
+        # print(self.main.pieces)
         
         self.main.controller.AffichePlaced()
         

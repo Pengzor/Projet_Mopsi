@@ -1,7 +1,7 @@
 from PyQt4 import QtGui, QtCore
 import sys
 import os
-
+import numpy as np
 
 res=100
 
