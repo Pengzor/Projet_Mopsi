@@ -23,7 +23,7 @@ class Controller:
         self.compteur=0
         
         #variables of state
-        self.blocPlaced = False
+        self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
@@ -78,7 +78,7 @@ class Controller:
         self.ui.fixedpieces=[]
         
         #state variables
-        self.blocPlaced = False
+        self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
