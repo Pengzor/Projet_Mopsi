@@ -1,5 +1,9 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+import inspect
+
+path = os.path.dirname(os.path.dirname(inspect.getfile(inspect.currentframe())))
+os.chdir(path)
+
 from codes.Classes import *
 from codes.Fonctions import *
 from codes.Pieces import *
@@ -234,7 +238,7 @@ class Ui_Dialog(object):
         self.PlaceBlocButton.setFont(font3)
         
         ##Compteur
-        self.label_c = QtGui.QLabel("Number of tries :")
+        self.label_c = QtGui.QLabel("Counter :")
         self.label_c.setFont(font)
         self.label_c.setAlignment(QtCore.Qt.AlignCenter)
         self.label_c.setObjectName(_fromUtf8("label_10"))
@@ -328,6 +332,7 @@ class Ui_Dialog(object):
         self.RefreshPeriod.setItemText(2, _translate("Dialog", "300", None))
         self.RefreshPeriod.setItemText(3, _translate("Dialog", "500", None))
         self.RefreshPeriod.setItemText(4, _translate("Dialog", "1000", None))
+        self.RefreshPeriod.setItemText(5, _translate("Dialog", "10000", None))
         self.label_10.setText(_translate("Dialog", "Solve Method ", None))
         self.SolveMethod.setItemText(0, _translate("Dialog", "1", None))
         self.SolveMethod.setItemText(1, _translate("Dialog", "2", None))

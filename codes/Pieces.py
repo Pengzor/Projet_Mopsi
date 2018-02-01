@@ -1,7 +1,11 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2\\codes')
+import inspect
+path = os.path.dirname(os.path.dirname(inspect.getfile(inspect.currentframe())))
+os.chdir(path)
+print(os.getcwd())
 
-from Classes import *
+
+from codes.Classes import *
 from codes.Pieces import *
 from PyQt4 import QtCore, QtGui
 

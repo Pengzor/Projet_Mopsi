@@ -1,13 +1,7 @@
 import os
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
-
 
 from PyQt4 import QtGui, QtCore
-# import sys
-# import random
-# import numpy as np
-from codes.Classes import *
-from codes.Pieces import *
+
 
 class PieceCreationWindow():        
     def __init__(self, main, n, m):

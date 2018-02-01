@@ -2,9 +2,12 @@ import os
 import csv
 import numpy as np
 import copy
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+import inspect
 
-from codes.Pieces import *
+path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+os.chdir(path)
+
+from Pieces import *
 
 
 ## Fonctions
@@ -111,8 +114,8 @@ def beta(t,n):
     return b*pow(t,a)
 
 
-def loi(t, dP):
-    crit= exp(-beta(t)*dP)
+def loi(t, dP, n):
+    crit= exp(-beta(t,n)*dP)
     return random.random() < crit
 
 
@@ -125,14 +128,14 @@ def transform1(Pieces, Pot, G, bloc, t, fixedPieces):
     while not P.move_possible(liste_dep[dep], G):
         dep=random.randint(0,3)
     dPot1=P.varV_move(liste_dep[dep],G)
-    if dPot1<=0 or loi(t,dPot1):
+    if dPot1<=0 or loi(t,dPot1, G.n):
         P.move(liste_dep[dep], G)
         Pot+=dPot1
         G.refresh(Pieces+fixedPieces,bloc)
      
     if P.rotate_possible(G):
         dPot2=P.varV_rotate(G)
-        if dPot2<=0 or loi(t,dPot2):
+        if dPot2<=0 or loi(t,dPot2, G.n):
             P.rotate(G)
             Pot+=dPot2
             G.refresh(Pieces+fixedPieces,bloc)
@@ -149,7 +152,7 @@ def transform2(Pieces, Pot, G, bloc, t, fixedPieces):
     while not P.move_possible(liste_dep[dep], G):
         dep=random.randint(0,3)
     dPot=P.varV_move(liste_dep[dep],G)
-    if dPot<=0 or loi(t,dPot):
+    if dPot<=0 or loi(t,dPot, G.n):
         P.move(liste_dep[dep], G)
         Pot+=dPot
         G.refresh(Pieces+fixedPieces,bloc)
@@ -167,14 +170,14 @@ def transform2(Pieces, Pot, G, bloc, t, fixedPieces):
         Q=Pieces[i2]
     
     dPot1=P.varV_permut(G,Q)
-    if dPot1<=0 or loi(t,dPot1):
+    if dPot1<=0 or loi(t,dPot1, G.n):
         P.permut(G, Q)
         Pot+=dPot1
         G.refresh(Pieces+fixedPieces,bloc)
      
     if P.rotate_possible(G):
         dPot2=P.varV_rotate(G)
-        if dPot2<=0 or loi(t,dPot2):
+        if dPot2<=0 or loi(t,dPot2, G.n):
             P.rotate(G)
             Pot+=dPot2
             G.refresh(Pieces+fixedPieces,bloc)
@@ -251,7 +254,8 @@ def findPosition(solPiece, sizeGrid):
     return i0, j0, solPiece
 
 def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
-    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2\\codes')
+    path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+    os.chdir(path)
     
     #Writing the data
     f = open("DonneesPuzzle.txt", "w")
@@ -306,7 +310,8 @@ def transformExhaustive(sizeGrid, listNumFixedSquares, listPieces):
     
     f.close()
     
-    os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+    path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+    os.chdir(path)
     
     #Process the solutions into sets of pieces
     setSolutions = []
