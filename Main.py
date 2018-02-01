@@ -1,7 +1,11 @@
 import os
 import sys
+import inspect
 
-os.chdir('D:\\Documents\\Ponts ParisTech\\Projet MOPSI\\Projet2')
+
+path = os.path.dirname(inspect.getfile(inspect.currentframe()))
+os.chdir(path)
+# print(os.getcwd())
 
 from codes.Fonctions import *
 from appli.Screen import *

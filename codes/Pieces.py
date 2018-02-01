@@ -1,8 +1,9 @@
 import os
-import inspect
+import inspect 
+
 path = os.path.dirname(os.path.dirname(inspect.getfile(inspect.currentframe())))
 os.chdir(path)
-print(os.getcwd())
+# print(os.getcwd())
 
 
 from codes.Classes import *
