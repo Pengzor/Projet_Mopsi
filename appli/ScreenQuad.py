@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-
+import numpy as np
 
 class PiecePlacementWindow():        
     def __init__(self, main, n, m):
