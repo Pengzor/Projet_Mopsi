@@ -32,8 +32,10 @@ void interface(){
     Arbre* racine = new Arbre(0, 0);
     rechercheSol6(mat, Solutions, sp, "", racine);
 
+    /*
     cout << endl << Solutions.size() << " solutions !" << endl << endl;
     racine->afficheInfos();
+    */
 
     ///---sauvegarde les résultats
     //sauvegarde
