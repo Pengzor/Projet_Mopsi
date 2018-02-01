@@ -47,7 +47,9 @@ class Ui_Dialog(object):
         
         
     def setupUi(self, Dialog):
-          
+        path = os.path.dirname(os.path.dirname(inspect.getfile(inspect.currentframe())))
+        os.chdir(path)
+
         app_icon = QtGui.QIcon()
         app_icon.addFile('logo.png', QtCore.QSize(238,238))
         self.app.setWindowIcon(app_icon)
