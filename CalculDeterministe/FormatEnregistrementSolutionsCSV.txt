@@ -1,0 +1,6 @@
+nombre de pieces // nombre de cases 'valides' (taille du plateau) // nombre de solutions trouvees
+
+***structure d'une solution***
+**autant de lignes que de pieces
+
+piece i : '1' lorsque piece i occupe la case j (colonne j)

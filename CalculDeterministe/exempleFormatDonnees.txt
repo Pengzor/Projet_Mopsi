@@ -1,0 +1,17 @@
+#taille plateau
+N
+
+#nombre de cases fixees
+nbCasesFixes
+#numero des cases fixees
+n1;n2...;nk
+
+#nombre de pieces
+nbPieces
+
+#Pour piece pi
+#dimensions hauteur x largeur
+hauteur; largeur
+#cases occupees = 1
+0;1;1
+1;1;1

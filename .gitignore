@@ -12,3 +12,7 @@ codes/*.dll
 
 #Fichier perso de développement/test
 codes/communication.py
+
+#Garder seulement le code source C++ dans CalculDeterministe
+CalculDeterministe/Build/
+CalculDeterministe/Source/CMakeLists.txt.user
