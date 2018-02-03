@@ -237,9 +237,6 @@ class Controller:
         PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
         
         
-        
-        ##
-        
     def SetMethod(self):
         if self.ui.SolveMethod.currentText()=="1":
             self.method=transform1

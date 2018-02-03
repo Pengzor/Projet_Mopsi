@@ -28,7 +28,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_Dialog(object):
+class Interface(object):
     
     def __init__(self, Dialog, appli):
         self.n = 3

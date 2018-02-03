@@ -94,6 +94,7 @@ class PieceCreationWindow():
         self.window.close()
         
         
+        
     def Clear(self):
         self.DrawGrid()
         self.clics =0
