@@ -8,27 +8,29 @@ from appli.ScreenBis import *
 from appli.ScreenTer import *
 from appli.ScreenQuad import *
 
-# from PyQt4 import QtCore, QtGui
   
 class Controller:
     def __init__(self, ui):
+        #to link with the screen
         self.ui = ui
-        self.continu=True	
-        
+        #For pausing
+        self.continu=True	 
+        #grid       
         self.grid=self.ui.grid
+        #Solving method
         self.method= transform1
-
-        self.T=100
-        
+        #Refresh period
+        self.T=1000
+        #Counter
         self.compteur=0
         
-        #variables of state
+        #Variables of state
         self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
 
-    def bind(self):
+    def bind(self):     #Assigns each widget to the correspinding function
         self.ui.InitButton.clicked.connect(self.Init)
         self.ui.ResetButton.clicked.connect(self.Reset)
         self.ui.SolveButton.clicked.connect(self.Solve)
@@ -38,10 +40,10 @@ class Controller:
         self.ui.ApplyPeriodButton.clicked.connect(self.SetPeriod)
         self.ui.ApplyMethodButton.clicked.connect(self.SetMethod)
         self.ui.ApplyModeButton.clicked.connect(self.SetUse)
-        # self.ui.ApplyMethodButton.clicked.connect(self.t)
         self.SetUse()
     
-    def AffichePiece(self, piece):
+    
+    def AffichePiece(self, piece):      #Displays a given piece on the screen
         n_p,m_p=piece.mat.shape
         for i in range(n_p):
             for j in range(m_p):
@@ -49,20 +51,28 @@ class Controller:
                     self.ui.DrawRect(piece.x + i,piece.y + j,  piece.color)
     
     
-    def AfficheBloc(self, bloc):
+    def AfficheBloc(self, bloc):        #Displays the bloc
         self.ui.DrawCercle(bloc.x,bloc.y)
         
 
-    def Clear(self):
+    def Clear(self):        #Clears the grid
         self.ui.Scene.clear()
+        self.ui.DrawGrid()
+        
+        #Buttons management
         self.ui.SolveButton.setEnabled(False)
         self.ui.ResetButton.setEnabled(False)
-        self.ui.DrawGrid()
+        
     
-    
-    def Reset(self):
+    def Reset(self):        #Resets the interface
         self.Clear()
         self.grid.clear()
+        self.compteur=0
+        self.ui.CompteurLCD.display(0)
+        self.ui.pieces = pieces_default(self.ui.n, self.ui.m)
+        self.ui.fixedpieces=[]
+        
+        #Buttons management
         self.ui.ResetButton.setEnabled(False)
         self.ui.ApplySizeButton.setEnabled(True)
         self.ui.ApplyPeriodButton.setEnabled(True)
@@ -70,22 +80,16 @@ class Controller:
         self.ui.PlaceBlocButton.setEnabled(True)
         self.ui.ApplyModeButton.setEnabled(False)
         self.ui.InterfButton.setEnabled(False)
-
-        self.compteur=0
-        self.ui.CompteurLCD.display(0)
         
-        self.ui.pieces = pieces_default(self.ui.n, self.ui.m)
-        self.ui.fixedpieces=[]
-        
-        #state variables
+        #State variables
         self.blocPlaced = True
         self.puzzleInitialized = False
         self.piecesAlreadyPlaced = False
         self.UpdateState()
-        
         self.ui.app.processEvents()
     
-    def Refresh(self, pieces, bloc= False):
+    
+    def Refresh(self, pieces, bloc= False):     #Refreshes the position of the pieces on the screen
         self.Clear()
         if not bloc:
             pass
@@ -95,19 +99,19 @@ class Controller:
             self.AffichePiece(piece)
     
     
-    def Init(self):
+    def Init(self):     #Randomly places pieces on the screen
         self.compteur=0
         self.Clear()
         self.AfficheBloc(self.ui.bloc)
         self.grid.clear()
-        
         config_init(self.grid ,self.ui.pieces, self.ui.fixedpieces, self.ui.bloc)
         
         for piece in self.ui.pieces:
             self.AffichePiece(piece)
         for piece in self.ui.fixedpieces:
             self.AffichePiece(piece)
-        
+            
+        #Buttons management
         self.ui.SolveButton.setEnabled(True)
         self.ui.ResetButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(True)
@@ -119,16 +123,21 @@ class Controller:
         self.puzzleInitialized = True
         self.UpdateState()
 
-    def Pause(self):
+
+    def Pause(self):        #Pauses the resolution
         self.continu= False
+        
+        #Buttons management
         self.ui.PauseButton.setEnabled(False)
         self.ui.InitButton.setEnabled(True)
         self.ui.SolveButton.setEnabled(True)
-        # print('Pause')
+
     
     
-    def Solve(self):
+    def Solve(self):        #Launches the resolution 
         self.continu = True
+        
+        #Buttons management
         self.ui.SolveButton.setEnabled(False)
         self.ui.ApplyPeriodButton.setEnabled(False)
         self.ui.ApplyMethodButton.setEnabled(False)
@@ -136,7 +145,7 @@ class Controller:
         self.ui.PauseButton.setEnabled(True)
         self.ui.PlaceBlocButton.setEnabled(False)
         
-        #---Recuit simule---
+        # ---Simulated annealing---
         if (self.method==transform1 or self.method==transform2):
             Pot=self.grid.V();
         
@@ -146,11 +155,11 @@ class Controller:
                 
                 Pot = self.method(self.ui.pieces, Pot, self.grid, self.ui.bloc, self.compteur, self.ui.fixedpieces)
             
-                if (self.compteur%self.T==0): 
-                    # time.sleep(0.1)
+                if (self.compteur%self.T==0):   #Refreshing the screen every T iterations
                     self.Refresh(self.ui.pieces+self.ui.fixedpieces, self.ui.bloc)
+                    
+                    #Magical functions preventing overflow
                     self.ui.app.processEvents()
-
                     self.ui.Screen.resetMatrix()
                     self.ui.Screen.resetTransform()
                     self.ui.Screen.resetCachedContent()
@@ -167,12 +176,13 @@ class Controller:
                 self.ui.Success(self.ui.n,self.ui.m,self.compteur)
             else: 
                 self.Pause()
-        
+                
+            #Buttons management
             self.ui.ResetButton.setEnabled(True)
             self.ui.ApplyPeriodButton.setEnabled(True)
             self.ui.ApplyMethodButton.setEnabled(True)
         
-        #---Algorithme exhaustif---
+        #---Exhaustive Algorithm---
         elif (self.method==transformExhaustive):
             
             #momentarily disable buttons
@@ -220,16 +230,15 @@ class Controller:
                 self.Reset()
                 self.ui.FailureExhaustive()
 
-    def PlaceBloc(self):
-        BlocPlacementWindow(self)
-        #self.UpdateState()   -> in the 'BlocPlacementWindow' function
+    def PlaceBloc(self):        #Opens the bloc placement interface
+        BlocPlacementWindow(self.ui)
 
 
-    def SetPeriod(self):
+    def SetPeriod(self):        #To modify the refresh Period
         self.T=int(self.ui.RefreshPeriod.currentText())
 
     
-    def SetSize(self):
+    def SetSize(self):      #To change the size of the puzzle
         self.ui.n=int(self.ui.PuzzleSize.currentText()[0])
         self.ui.m=int(self.ui.PuzzleSize.currentText()[-1])
         self.ui.pieces= pieces_default(self.ui.n, self.ui.m)
@@ -238,18 +247,14 @@ class Controller:
         self.ui.res = int(900/max(self.ui.n, self.ui.m))
         self.Reset()
         
-    def CreatePieces(self):
-        PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
+    def CreatePieces(self):     #Opens the piece creation interface
+        PieceCreationWindow(self.ui)
     
-    def PlacePieces(self):
-        #self.Reset()
-        PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
+    def PlacePieces(self):      #Opens the piece placement interface
+        PiecePlacementWindow(self.ui)
         
         
-        
-        ##
-        
-    def SetMethod(self):
+    def SetMethod(self):        #To set the solving method
         if self.ui.SolveMethod.currentText()=="1":
             self.method=transform1
             self.ui.ApplyPeriodButton.setEnabled(True)
@@ -261,7 +266,8 @@ class Controller:
             self.ui.ApplyPeriodButton.setEnabled(False)
         self.UpdateState()
 
-    def SetUse(self):
+
+    def SetUse(self):       #Links the InterButton to the corresponding use
         if self.ui.UseMode.currentText()=="Default":
             self.ui.InterfButton.setEnabled(False)
         elif self.ui.UseMode.currentText()=="Create own puzzle":
@@ -273,17 +279,17 @@ class Controller:
             self.ui.InterfButton.clicked.connect(self.PlacePieces)
             
     
-    def AffichePlaced(self):
+    def AffichePlaced(self):        #Display only pieces fixed in the interface
         self.Clear()
         for piece in self.ui.fixedpieces:
             self.AffichePiece(piece)
         self.AfficheBloc(self.ui.bloc)
-        # self.ui.PlaceBlocButton.setEnabled(False)
         self.ui.InterfButton.setEnabled(False)
         
         self.ui.ApplyModeButton.setEnabled(False)
 
-    def UpdateState(self):
+
+    def UpdateState(self):      #Basically an easier way to manage button status
         if (self.blocPlaced and self.puzzleInitialized):
             self.ui.SolveButton.setEnabled(True)
             self.ui.ApplySizeButton.setEnabled(False)
@@ -316,6 +322,3 @@ class Controller:
         self.ui.ResetButton.setEnabled(True)
         
         self.ui.app.processEvents()
-
-
-

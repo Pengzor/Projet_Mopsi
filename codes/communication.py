@@ -1,15 +1,11 @@
 import os
 import csv
-
 nomFichier = "ResultatPuzzle.csv"
-
 os.system("puzzle.exe")
-
 
 #lecture du fichier resultat
 
 f = open("ResultatPuzzle.csv", "r")
-
 ligne = f.readline()
 a = ligne.split(";")
 nbPieces = int(a[0])
@@ -35,7 +31,5 @@ for i in range(0, nbSolutions):
         ligne = convert(ligne)
         sol.append(ligne)
     Solutions.append(sol)
-
-
 
 f.close()

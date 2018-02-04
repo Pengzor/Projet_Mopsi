@@ -10,11 +10,11 @@ os.chdir(path)
 from Pieces import *
 
 
-## Fonctions
+## Common stuff
 
 liste_dep=['haut','bas','gauche','droite']
 
-def pieces_default(n,m):
+def pieces_default(n,m):        #Creates the default puzzle for the corresponding size
     if (n==3 and m==3):
         PA = piece3a()
         PB = piece3b()
@@ -63,7 +63,8 @@ def pieces_default(n,m):
     
     return Pieces
 
-def bloc_default(n,m):
+
+def bloc_default(n,m):      #Gives a default bloc position such as the default puzzle is solvable
     if (n==3 and m==3):
         B=bloc(0,0)
         
@@ -79,17 +80,10 @@ def bloc_default(n,m):
     if (n==7 and m==7):
         B=bloc(2,1)
 
-    
     return B
-    
-def remplissable(G,Pieces):  #Une condition nécessaire pour pouvoir résoudre le puzzle
-    som= int(0)
-    for piece in Pieces:
-        som+= np.sum(piece.mat)
-    return som==(G.n*G.m) - 1
 
 
-def config_init(G,Pieces, fixedPieces, Bloc= False):
+def config_init(G,Pieces, fixedPieces, Bloc= False):        #Randomly places the pieces
     for piece in Pieces:
         ip,jp=piece.mat.shape
         piece.x=random.randint(0,G.n-ip)
@@ -102,9 +96,11 @@ def config_init(G,Pieces, fixedPieces, Bloc= False):
         pass
     else:
         G.add_bloc(Bloc)
+        
+        
+## Simulated annealing
 
-
-def beta(t,n):
+def beta(t,n):      #Optimized beta function
     if n<=7:
         a=0.1
         b=0.9
@@ -114,12 +110,12 @@ def beta(t,n):
     return b*pow(t,a)
 
 
-def loi(t, dP, n):
+def loi(t, dP, n):      #Gibbs measure
     crit= exp(-beta(t,n)*dP)
     return random.random() < crit
 
 
-def transform1(Pieces, Pot, G, bloc, t, fixedPieces):
+def transform1(Pieces, Pot, G, bloc, t, fixedPieces):   #Rotation + move neighbourhood
 
     dep=random.randint(0,3)
     index=random.randint(0,len(Pieces)-1)
@@ -143,7 +139,7 @@ def transform1(Pieces, Pot, G, bloc, t, fixedPieces):
     return int(Pot)
 
 
-def transform2(Pieces, Pot, G, bloc, t, fixedPieces):
+def transform2(Pieces, Pot, G, bloc, t, fixedPieces):       #Rotation + move + permutation neighbourhood
     
     dep=random.randint(0,3)
     index=random.randint(0,len(Pieces)-1)
