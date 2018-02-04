@@ -11,12 +11,14 @@ import random
 
 class PieceCreationWindow():        
     def __init__(self, main):
-        #Resolution
-        self.res= 700/n
         self.main = main 
         #Size       
         self.n = main.n
         self.m = main.m
+        n=self.n
+        m=self.m
+        #Resolution
+        self.res= 700/n
         #Number of slots left
         self.compt= self.n*self.m-1
         self.clics=0

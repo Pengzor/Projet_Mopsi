@@ -19,7 +19,7 @@ class BlocPlacementWindow():
         self.DrawGrid()
         
         self.Screen = QtGui.QGraphicsView(self.Scene)
-        self.Screen.setGeometry(QtCore.QRect(0, 0, self.main.m*res, self.main.n*res))
+        self.Screen.setGeometry(QtCore.QRect(0, 0, self.main.m*self.res, self.main.n*self.res))
         self.Screen.setSceneRect(QtCore.QRectF(0.0, 0.0, 0.0, 0.0))
         self.Screen.mousePressEvent = self.getPos
 
@@ -92,10 +92,10 @@ class BlocPlacementWindow():
         self.main.controller.Clear()
         self.main.controller.AfficheBloc(self.main.bloc)
         self.main.ApplySizeButton.setEnabled(False)
-        self.main.self.resetButton.setEnabled(True)
+        self.main.ResetButton.setEnabled(True)
         #bloc placed
         self.main.controller.blocPlaced = True
-        self.main.controlller.UpdateState()
+        self.main.controller.UpdateState()
         
     def DrawCercle(self, x, y):     #Drawing the bloc
         pen = QtGui.QPen()

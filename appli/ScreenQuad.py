@@ -4,12 +4,15 @@ import numpy as np
 class PiecePlacementWindow():        
     def __init__(self, main):
         self.main = main  
-        #Resolutions
-        self.res= 500/n
-        self.resp=250/n
         #Size
         self.n = main.n
         self.m = main.m
+        n=self.n
+        m=self.m
+        #Resolutions
+        self.res= 500/n
+        self.resp=250/n
+
         #Pieces
         self.pieces=np.copy(main.pieces)
         #Placed pieces
