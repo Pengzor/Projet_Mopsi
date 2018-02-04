@@ -38,7 +38,6 @@ class Interface(object):
         self.app = appli
         self.pieces=pieces_default(self.n, self.m)
         self.fixedpieces=[]
-
         self.bloc = bloc_default(self.n, self.m)
         
         self.setupUi(Dialog)
@@ -46,7 +45,9 @@ class Interface(object):
         self.controller.bind()
         
         
-    def setupUi(self, Dialog):
+    def setupUi(self, Dialog):      #Design of the window. Made with QtDesigner, reorganized manually to be understandable
+        
+        # Icon & name of the interface
         path = os.path.dirname(os.path.dirname(inspect.getfile(inspect.currentframe())))
         os.chdir(path)
 
@@ -57,22 +58,16 @@ class Interface(object):
         Dialog.setEnabled(True)
         Dialog.resize(1600, 1100)
         
-        
-        ## Fenêtre d'affichage
-        
+        # The puzzle display widgets
         self.Scene = QtGui.QGraphicsScene(Dialog)
         self.DrawGrid()
-        
         self.Screen = QtGui.QGraphicsView(self.Scene,Dialog)
         self.Screen.setGeometry(QtCore.QRect(50, 50, 1000, 1000))
         self.Screen.setSceneRect(QtCore.QRectF(0.0, 0.0, 0.0, 0.0))
         self.Screen.setObjectName(_fromUtf8("graphicsView"))
-        
         self.Screen.setViewportUpdateMode(QtGui.QGraphicsView.FullViewportUpdate)
         
-        
-        ## Polices d'écriture
-        
+        # Fonts
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Calibri"))
         font.setPointSize(14)
@@ -89,8 +84,7 @@ class Interface(object):
         font3.setPointSize(12)
         
         
-        ## Texte Réglage
-        
+        # Settings label
         self.label = QtGui.QLabel()
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
         self.label.setSizePolicy(sizePolicy)
@@ -99,7 +93,7 @@ class Interface(object):
         self.label.setObjectName(_fromUtf8("label"))
         
         
-        ## PuzzleSize
+        # Size of the puzzle
         
         self.label_8 = QtGui.QLabel()
         self.label_8.setFont(font2)
@@ -124,8 +118,7 @@ class Interface(object):
         self.ApplySizeButton.setMaximumWidth(150)
         
     
-        ## RefreshPeriod
-        
+        # Refresh period
         self.label_9 = QtGui.QLabel()
         self.label_9.setSizePolicy(sizePolicy)
         self.label_9.setFont(font2)
@@ -150,11 +143,8 @@ class Interface(object):
         self.ApplyPeriodButton = QtGui.QPushButton("Apply")
         self.ApplyPeriodButton.setMaximumHeight(35)
         self.ApplyPeriodButton.setMaximumWidth(150)
-
         
-        
-        ## SolveMethod
-        
+        # Solve Method
         self.label_10 = QtGui.QLabel()
         self.label_10.setFont(font2)
         self.label_10.setAlignment(QtCore.Qt.AlignRight)
@@ -170,7 +160,7 @@ class Interface(object):
         self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.addItem(_fromUtf8(""))
-        self.SolveMethod.addItem(_fromUtf8(""))
+        # self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.setMinimumWidth(90)
         
         self.ApplyMethodButton = QtGui.QPushButton("Apply")
@@ -178,7 +168,7 @@ class Interface(object):
         self.ApplyMethodButton.setMaximumWidth(150)
         
         
-        ## UseMode
+        # Use Mode
         
         self.label_2 = QtGui.QLabel()
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
@@ -200,36 +190,24 @@ class Interface(object):
         self.UseMode.addItem(_fromUtf8(""))
         
         self.ApplyModeButton = QtGui.QPushButton("Apply")
-        # self.ApplyModeButton.setMaximumHeight(35)
-        # self.ApplyModeButton.setMaximumWidth(150)
-        
-        
-        ## Boutons
-        
-        #SaveButton
-        # self.SaveButton = QtGui.QPushButton('Save')
-        # self.SaveButton.setFont(font3)
 
+        # --- Buttons ---
         
         #InterfButton
         self.InterfButton = QtGui.QPushButton("Open user Window")
         self.InterfButton.setFont(font3)
  
-        
         #ResetButton
         self.ResetButton = QtGui.QPushButton("Reset") 
         self.ResetButton.setFont(font3)
-        
         
         #InitButton
         self.InitButton = QtGui.QPushButton("Initialize")
         self.InitButton.setFont(font3)
 
-
         #SolveButton
         self.SolveButton = QtGui.QPushButton("Solve")
         self.SolveButton.setFont(font3)
-        
         
         #PauseButton
         self.PauseButton = QtGui.QPushButton("Pause")
@@ -240,7 +218,7 @@ class Interface(object):
         self.PlaceBlocButton = QtGui.QPushButton("Bloc Placement")
         self.PlaceBlocButton.setFont(font3)
         
-        ##Compteur
+        #Counter
         self.label_c = QtGui.QLabel("Counter :")
         self.label_c.setFont(font)
         self.label_c.setAlignment(QtCore.Qt.AlignCenter)
@@ -248,14 +226,13 @@ class Interface(object):
    
         self.CompteurLayout = QtGui.QHBoxLayout()
         self.CompteurLCD = QtGui.QLCDNumber()
-        
         self.CompteurLayout.addWidget(self.label_c)
         self.CompteurLayout.addWidget(self.CompteurLCD)
         self.CompteurLCD.setDigitCount(8)
         self.CompteurLCD.setMaximumHeight(50)
 
 
-        ## Mise en page 
+        # Layouts & Display
         
         self.verticalLayoutWidget = QtGui.QWidget(Dialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(1080, 50, 468, 1021))
@@ -281,7 +258,6 @@ class Interface(object):
         self.horizontalLayout_4.addWidget(self.SolveMethod)
         self.horizontalLayout_4.addWidget(self.ApplyMethodButton)
         self.verticalLayout.addLayout(self.horizontalLayout_4)        
-        # self.verticalLayout.addWidget(self.SaveButton)
         spacerItem = QtGui.QSpacerItem(20, 60, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem)        
         self.verticalLayout.addWidget(self.label_2)
@@ -315,12 +291,13 @@ class Interface(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
+        #Buttons management
         self.PauseButton.setEnabled(False)
         self.SolveButton.setEnabled(False)
         self.ResetButton.setEnabled(False)
     
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, Dialog):        #Qt designer function to display the texts
         Dialog.setWindowTitle(_translate("Dialog", "Puzzle Solver", None))
         self.label.setText(_translate("Dialog", "Settings", None))
         self.label_8.setText(_translate("Dialog", "Puzzle Size ", None))
@@ -347,16 +324,16 @@ class Interface(object):
         self.UseMode.setItemText(2, _translate("Dialog", "Create own puzzle", None))
 
     
-    def Success(self, n, m, compteur):
+    def Success(self, n, m, compteur):      #Opens a Window when the probabilist methods finds a solution
         msg = QtGui.QMessageBox()
         msg.setIcon(QtGui.QMessageBox.Information)
-        
         text = "Puzzle " + str(n) + "x" + str(m) + " solved in " + str(compteur) + " tries !"
         msg.setText(text)
         msg.setWindowTitle("Success")
         msg.exec_()
     
-    def SuccessExhaustive(self, nbSolutions, n, m):
+    
+    def SuccessExhaustive(self, nbSolutions, n, m):     #Opens a Window when the exhaustive methods finds solutions
         msg = QtGui.QMessageBox()
         msg.setIcon(QtGui.QMessageBox.Information)
         
@@ -365,7 +342,7 @@ class Interface(object):
         msg.setWindowTitle("Success")
         msg.exec_()
     
-    def FailureExhaustive(self):
+    def FailureExhaustive(self):        #Opens a Window when the exhaustive methods doesn't find any solution
         msg = QtGui.QMessageBox()
         msg.setIcon(QtGui.QMessageBox.Information)
         
@@ -375,7 +352,7 @@ class Interface(object):
         msg.exec_()
 
 
-    def DrawGrid(self):
+    def DrawGrid(self):     #Draws the grid
         col= QtGui.QColor(255,255,255)
         pen = QtGui.QPen()
         pen.setWidth(3)
@@ -384,7 +361,7 @@ class Interface(object):
         self.Scene.addRect(-e, -e, self.m*self.res + 2*e, self.n*self.res + 2*e, pen , brush )
     
     
-    def DrawRect(self,x ,y, col):
+    def DrawRect(self,x ,y, col):       #Draws a rectangle with makes a piece
         pen = QtGui.QPen()
         col1= QtGui.QColor(40,40,40)
         gradient = QtGui.QRadialGradient(x*self.res + self.res/2,y*self.res + self.res/2, 1.3*self.res,x*self.res + self.res/2, y*self.res + self.res/2)
@@ -393,7 +370,8 @@ class Interface(object):
         brush = QtGui.QBrush(gradient)
         self.Scene.addRect(x*self.res, y*self.res, self.res, self.res, pen , brush )
     
-    def DrawCercle(self, x, y):
+    
+    def DrawCercle(self, x, y):     #Draws the bloc basically
         pen = QtGui.QPen()
         pen.setWidth(2)
         col = QtGui.QColor(150,150,150)
@@ -402,11 +380,10 @@ class Interface(object):
         gradient.setColorAt(0, col)
         gradient.setColorAt(1, col1)
         brush = QtGui.QBrush(gradient)
-
         self.Scene.addEllipse( self.res*x + self.res/4, self.res * y + self.res/4, self.res/2, self.res/2, pen , brush)
     
-    def DisableAll(self):
-        #Disable all buttons while trying to calculate in the executable
+    
+    def DisableAll(self):       #Disable all buttons while trying to calculate in the executable
         self.ApplySizeButton.setEnabled(False)
         self.ApplyPeriodButton.setEnabled(False)
         self.ApplyMethodButton.setEnabled(False)
@@ -415,11 +392,8 @@ class Interface(object):
         self.InitButton.setEnabled(False)
         self.ResetButton.setEnabled(False)
         self.PauseButton.setEnabled(False)
-        
         self.app.processEvents()
     
-    def ReEnableAll(self):
-        #Enable again all buttons after the exhaustive calcul
+    def ReEnableAll(self):      #Enable again all buttons after the exhaustive calcul
         self.ResetButton.setEnabled(True)
-        
         self.app.processEvents()
