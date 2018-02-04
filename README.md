@@ -4,7 +4,9 @@ The aim of this app is to solve polyominos pavement problem of size NxN, for N =
 
 ## Getting Started
 
-These instructions will should 
+These instructions should give you the basics to run the program on your computer.
+Please refer to the documentation of the specified librairies for their installation.
+
 ### Prerequisites
 
 The following libraries for Python are required:
@@ -35,7 +37,7 @@ and copy them in the folder ```codes```
 
 ### Launching
 
-Open ```main.py``` and run it. TADAM !
+Open ```main.py``` and run it. TADAM ! You can now use the interface
 
 ## Authors
 
@@ -45,6 +47,6 @@ Open ```main.py``` and run it. TADAM !
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* Thanks to P-A Zitt for the explanation of the maths used here
+* Thanks to T. Martinez and P. Monasse for their precious help to include the C++ code in Python
+* Hat tip to G. Desforges for helping us with the basics of a MVC interface
