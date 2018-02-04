@@ -31,7 +31,11 @@ The libraries for the C++ executable are too heavy to be put on git, download th
 
 https://drive.google.com/drive/folders/1FNzrqiQZBRaiTfYuA8jjnXURU6c4HuuP?usp=sharing
 
-and copy them in the folder "codes"
+and copy them in the folder ```codes```
+
+### Launching
+
+Open ```main.py``` and run it. TADAM !
 
 ## Authors
 
