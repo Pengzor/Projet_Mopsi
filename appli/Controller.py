@@ -11,11 +11,17 @@ from appli.ScreenQuad import *
   
 class Controller:
     def __init__(self, ui):
+        #to link with the screen
         self.ui = ui
-        self.continu=True	        
+        #For pausing
+        self.continu=True	 
+        #grid       
         self.grid=self.ui.grid
+        #Solving method
         self.method= transform1
+        #Refresh period
         self.T=1000
+        #Counter
         self.compteur=0
         
         #Variables of state
@@ -216,7 +222,7 @@ class Controller:
                 self.ui.FailureExhaustive()
 
     def PlaceBloc(self):        #Opens the bloc placement interface
-        BlocPlacementWindow(self)
+        BlocPlacementWindow(self.ui)
 
 
     def SetPeriod(self):        #To modify the refresh Period
@@ -233,10 +239,10 @@ class Controller:
         self.Reset()
         
     def CreatePieces(self):     #Opens the piece creation interface
-        PieceCreationWindow(self.ui, self.ui.n, self.ui.m)
+        PieceCreationWindow(self.ui)
     
     def PlacePieces(self):      #Opens the piece placement interface
-        PiecePlacementWindow(self.ui, self.ui.n, self.ui.m)
+        PiecePlacementWindow(self.ui)
         
         
     def SetMethod(self):        #To set the solving method

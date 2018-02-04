@@ -10,9 +10,12 @@ from codes.Pieces import *
 from appli.Controller import *
 from appli.ScreenBis import *
 
-##
+
 
 from PyQt4 import QtCore, QtGui
+
+
+# Qt Designer stuff
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -28,18 +31,24 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+## The main window
+
 class Interface(object):
     
     def __init__(self, Dialog, appli):
+        #Size
         self.n = 3
         self.m = 3
+        #Resolution
         self.res = int(900/max(self.n, self.m))
+        #Grid
         self.grid = grid(self.n,self.m)
-        self.app = appli
+        #Pieces
         self.pieces=pieces_default(self.n, self.m)
         self.fixedpieces=[]
         self.bloc = bloc_default(self.n, self.m)
-        
+        #App & controller
+        self.app = appli
         self.setupUi(Dialog)
         self.controller = Controller(self)
         self.controller.bind()
