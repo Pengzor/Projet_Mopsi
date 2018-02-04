@@ -19,9 +19,9 @@ class BlocPlacementWindow():
         self.DrawGrid()
         
         self.Screen = QtGui.QGraphicsView(self.Scene)
-        self.Screen.setGeometry(QtCore.QRect(0, 0, self.main.m*self.res, self.main.n*self.res))
+        self.Screen.setGeometry(QtCore.QRect(0, 0, self.main.m*res, self.main.n*res))
         self.Screen.setSceneRect(QtCore.QRectF(0.0, 0.0, 0.0, 0.0))
-        self.Screen.mousePself.ressEvent = self.getPos
+        self.Screen.mousePressEvent = self.getPos
 
         #Bottom of screen buttons
         self.lowerPanel = QtGui.QHBoxLayout()
