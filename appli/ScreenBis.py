@@ -50,6 +50,7 @@ class BlocPlacementWindow():
         self.buttonClear.clicked.connect(self.Clear)
         self.buttonOk.clicked.connect(self.Ok)
     
+    
     def Ok(self):       #To apply changes
         self.Update()
         self.window.close()
