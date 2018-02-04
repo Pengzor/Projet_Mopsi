@@ -1,21 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import random
-import pygame 
-from pygame.locals import *
 import os
 import time
 from math import *
 
-## Constantes
-
-beta= 1
-
-# r=200
-
-
-
-## Classes
 
 class grid:
     def __init__(self,n,m):
@@ -25,17 +13,7 @@ class grid:
     
     def clear(self):
         self.mat=np.zeros((self.n,self.m))
-    
-    
-    def affiche(self):
-        im1 = plt.matshow(self.mat.transpose())
-        plt.colorbar(im1)
-        # Grille:
-        plt.gca().set_xticks([x - 0.5 for x in plt.gca().get_xticks()][1:], minor='true')
-        plt.gca().set_yticks([y - 0.5 for y in plt.gca().get_yticks()][1:], minor='true')
-        plt.grid(which='minor')
-        plt.show()
-    
+
     
     def add_piece(self, piece):   #x et y sont les coordonnées du coin supérieur gauche de la pièce
         n_p,m_p=piece.mat.shape
@@ -47,10 +25,6 @@ class grid:
     
     def add_bloc(self, bloc):
         self.mat[bloc.x,bloc.y]+=1
-
-
-    # def clear(self):
-        # self.mat=np.zeros(self.mat.shape)
 
 
     def V(self):
