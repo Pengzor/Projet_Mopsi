@@ -113,9 +113,6 @@ class Interface(object):
         self.label_8.setObjectName(_fromUtf8("label_8"))
   
         self.PuzzleSize = QtGui.QComboBox()
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.PuzzleSize.sizePolicy().hasHeightForWidth())
         self.PuzzleSize.setSizePolicy(sizePolicy)
         self.PuzzleSize.setObjectName(_fromUtf8("PuzzleSize"))
         self.PuzzleSize.addItem(_fromUtf8(""))
@@ -135,10 +132,6 @@ class Interface(object):
         self.label_9.setObjectName(_fromUtf8("label_9"))        
     
         self.RefreshPeriod = QtGui.QComboBox()
-        # sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.RefreshPeriod.sizePolicy().hasHeightForWidth())
         self.RefreshPeriod.setSizePolicy(sizePolicy)
         self.RefreshPeriod.setObjectName(_fromUtf8("RefreshPeriod"))
         self.RefreshPeriod.addItem(_fromUtf8(""))
@@ -159,10 +152,6 @@ class Interface(object):
         self.label_10.setObjectName(_fromUtf8("label_10"))
         
         self.SolveMethod = QtGui.QComboBox()
-        # sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.SolveMethod.sizePolicy().hasHeightForWidth())
         self.SolveMethod.setSizePolicy(sizePolicy)
         self.SolveMethod.setObjectName(_fromUtf8("SolveMethod"))
         self.SolveMethod.addItem(_fromUtf8(""))
