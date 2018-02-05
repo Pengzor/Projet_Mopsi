@@ -188,14 +188,14 @@ class Controller:
             #momentarily disable buttons
             self.ui.DisableAll()
             
-            #indicate the solving operation
-            solving = QtGui.QMessageBox()
-            solving.setIcon(QtGui.QMessageBox.Information)
-            
-            text = "Calculation in progress..."
-            msg.setText(text)
-            msg.setWindowTitle("Solving")
-            msg.exec_()
+            # #indicate the solving operation
+            # solving = QtGui.QMessageBox()
+            # solving.setIcon(QtGui.QMessageBox.Information)
+            # 
+            # text = "Calculation in progress..."
+            # msg.setText(text)
+            # msg.setWindowTitle("Solving")
+            # msg.exec_()
             
             #solutions to display
             #--Rq : always 1 single fixed square
