@@ -272,11 +272,9 @@ class Controller:
             self.ui.InterfButton.setEnabled(False)
         elif self.ui.UseMode.currentText()=="Create own puzzle":
             self.ui.InterfButton.setEnabled(True)
-            #self.ui.InterfButton.clicked.connect(self.CreatePieces)
         
         elif self.ui.UseMode.currentText()=="Place puzzle pieces":
             self.ui.InterfButton.setEnabled(True)
-            #self.ui.InterfButton.clicked.connect(self.PlacePieces)
 
     def UserWindow(self):
         if self.ui.UseMode.currentText()=="Create own puzzle":
