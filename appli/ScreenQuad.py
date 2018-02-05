@@ -106,7 +106,7 @@ class PiecePlacementWindow():
         self.mainPanel.addLayout(self.lowerPanel)
         self.window.setLayout(self.mainPanel)
         self.window.setWindowTitle('Piece Placement')
-        self.window.show()
+        #self.window.show()
 
         # Binds
         self.Screen.mousePressEvent = self.getPos
@@ -123,6 +123,8 @@ class PiecePlacementWindow():
         self.PieceList.setEnabled(True)
         self.index = int(self.PieceList.currentText())-1
         self.DrawBloc(main.bloc.x,main.bloc.y)
+        
+        self.window.show()
         
     
     def PreviewPiece(self):     #Preview a piece
@@ -291,6 +293,7 @@ class PiecePlacementWindow():
         self.main.controller.piecesAlreadyPlaced = True
         self.main.controller.UpdateState()
         self.window.close()
+        self.window.destroy()
         
         
     def DrawBloc(self, x, y):       #Draws the bloc

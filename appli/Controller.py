@@ -40,6 +40,7 @@ class Controller:
         self.ui.ApplyPeriodButton.clicked.connect(self.SetPeriod)
         self.ui.ApplyMethodButton.clicked.connect(self.SetMethod)
         self.ui.ApplyModeButton.clicked.connect(self.SetUse)
+        self.ui.InterfButton.clicked.connect(self.UserWindow)
         self.SetUse()
     
     
@@ -253,7 +254,6 @@ class Controller:
     def PlacePieces(self):      #Opens the piece placement interface
         PiecePlacementWindow(self.ui)
         
-        
     def SetMethod(self):        #To set the solving method
         if self.ui.SolveMethod.currentText()=="1":
             self.method=transform1
@@ -272,12 +272,17 @@ class Controller:
             self.ui.InterfButton.setEnabled(False)
         elif self.ui.UseMode.currentText()=="Create own puzzle":
             self.ui.InterfButton.setEnabled(True)
-            self.ui.InterfButton.clicked.connect(self.CreatePieces)
+            #self.ui.InterfButton.clicked.connect(self.CreatePieces)
         
         elif self.ui.UseMode.currentText()=="Place puzzle pieces":
             self.ui.InterfButton.setEnabled(True)
-            self.ui.InterfButton.clicked.connect(self.PlacePieces)
-            
+            #self.ui.InterfButton.clicked.connect(self.PlacePieces)
+
+    def UserWindow(self):
+        if self.ui.UseMode.currentText()=="Create own puzzle":
+            self.CreatePieces()
+        elif self.ui.UseMode.currentText()=="Place puzzle pieces":
+            self.PlacePieces()
     
     def AffichePlaced(self):        #Display only pieces fixed in the interface
         self.Clear()
