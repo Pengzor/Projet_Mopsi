@@ -18,7 +18,7 @@ class PieceCreationWindow():
         n=self.n
         m=self.m
         #Resolution
-        self.res= 700/n
+        self.res= 500/n
         #Number of slots left
         self.compt= self.n*self.m-1
         self.clics=0
