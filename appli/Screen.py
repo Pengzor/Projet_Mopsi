@@ -92,6 +92,9 @@ class Interface(object):
         font3 = QtGui.QFont()
         font3.setPointSize(12)
         
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
         
         # Settings label
         self.label = QtGui.QLabel()
@@ -100,13 +103,11 @@ class Interface(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName(_fromUtf8("label"))
-        
-        
+
         # Size of the puzzle
-        
         self.label_8 = QtGui.QLabel()
+        self.label_8.setSizePolicy(sizePolicy)
         self.label_8.setFont(font2)
-        self.label_8.setAlignment(QtCore.Qt.AlignRight)
         self.label_8.setObjectName(_fromUtf8("label_8"))
   
         self.PuzzleSize = QtGui.QComboBox()
@@ -123,15 +124,12 @@ class Interface(object):
         self.PuzzleSize.setMaximumWidth(90)
         
         self.ApplySizeButton = QtGui.QPushButton("Apply")
-        self.ApplySizeButton.setMaximumHeight(25)
-        self.ApplySizeButton.setMaximumWidth(150)
-        
+        self.ApplySizeButton.setMaximumWidth(120)
     
         # Refresh period
         self.label_9 = QtGui.QLabel()
         self.label_9.setSizePolicy(sizePolicy)
         self.label_9.setFont(font2)
-        self.label_9.setAlignment(QtCore.Qt.AlignRight)
         self.label_9.setObjectName(_fromUtf8("label_9"))        
     
         self.RefreshPeriod = QtGui.QComboBox()
@@ -150,13 +148,12 @@ class Interface(object):
         self.RefreshPeriod.setMinimumWidth(90)
         
         self.ApplyPeriodButton = QtGui.QPushButton("Apply")
-        self.ApplyPeriodButton.setMaximumHeight(25)
-        self.ApplyPeriodButton.setMaximumWidth(150)
+        self.ApplyPeriodButton.setMaximumWidth(120)
         
         # Solve Method
         self.label_10 = QtGui.QLabel()
+        self.label_10.setSizePolicy(sizePolicy)
         self.label_10.setFont(font2)
-        self.label_10.setAlignment(QtCore.Qt.AlignRight)
         self.label_10.setObjectName(_fromUtf8("label_10"))
         
         self.SolveMethod = QtGui.QComboBox()
@@ -169,16 +166,13 @@ class Interface(object):
         self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.addItem(_fromUtf8(""))
-        # self.SolveMethod.addItem(_fromUtf8(""))
         self.SolveMethod.setMinimumWidth(90)
         
         self.ApplyMethodButton = QtGui.QPushButton("Apply")
-        self.ApplyMethodButton.setMaximumHeight(25)
-        self.ApplyMethodButton.setMaximumWidth(150)
+        self.ApplyMethodButton.setMaximumWidth(120)
         
         
         # Use Mode
-        
         self.label_2 = QtGui.QLabel()
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
