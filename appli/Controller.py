@@ -244,7 +244,7 @@ class Controller:
         self.ui.pieces= pieces_default(self.ui.n, self.ui.m)
         self.ui.bloc=bloc_default(self.ui.n, self.ui.m)
         self.grid = grid(self.ui.n,self.ui.m)
-        self.ui.res = int(900/max(self.ui.n, self.ui.m))
+        self.ui.res = int(650/max(self.ui.n, self.ui.m))
         self.Reset()
         
     def CreatePieces(self):     #Opens the piece creation interface

@@ -8,7 +8,7 @@ class BlocPlacementWindow():
     def __init__(self, main):
         self.main = main
         #Display resolution
-        self.res = 100     
+        self.res = 80     
         #Size
         self.n = main.n
         self.m = main.m

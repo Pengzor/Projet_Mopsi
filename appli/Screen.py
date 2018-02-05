@@ -40,7 +40,7 @@ class Interface(object):
         self.n = 3
         self.m = 3
         #Resolution
-        self.res = int(900/max(self.n, self.m))
+        self.res = int(650/max(self.n, self.m))
         #Grid
         self.grid = grid(self.n,self.m)
         #Pieces
@@ -65,13 +65,13 @@ class Interface(object):
         self.app.setWindowIcon(app_icon)
         Dialog.setObjectName(_fromUtf8("Résolution de Puzzle"))
         Dialog.setEnabled(True)
-        Dialog.resize(1600, 1100)
+        Dialog.resize(1600, 900)
         
         # The puzzle display widgets
         self.Scene = QtGui.QGraphicsScene(Dialog)
         self.DrawGrid()
         self.Screen = QtGui.QGraphicsView(self.Scene,Dialog)
-        self.Screen.setGeometry(QtCore.QRect(50, 50, 1000, 1000))
+        self.Screen.setGeometry(QtCore.QRect(50, 50, 800, 800))
         self.Screen.setSceneRect(QtCore.QRectF(0.0, 0.0, 0.0, 0.0))
         self.Screen.setObjectName(_fromUtf8("graphicsView"))
         self.Screen.setViewportUpdateMode(QtGui.QGraphicsView.FullViewportUpdate)
@@ -123,7 +123,7 @@ class Interface(object):
         self.PuzzleSize.setMaximumWidth(90)
         
         self.ApplySizeButton = QtGui.QPushButton("Apply")
-        self.ApplySizeButton.setMaximumHeight(35)
+        self.ApplySizeButton.setMaximumHeight(25)
         self.ApplySizeButton.setMaximumWidth(150)
         
     
@@ -150,7 +150,7 @@ class Interface(object):
         self.RefreshPeriod.setMinimumWidth(90)
         
         self.ApplyPeriodButton = QtGui.QPushButton("Apply")
-        self.ApplyPeriodButton.setMaximumHeight(35)
+        self.ApplyPeriodButton.setMaximumHeight(25)
         self.ApplyPeriodButton.setMaximumWidth(150)
         
         # Solve Method
@@ -173,7 +173,7 @@ class Interface(object):
         self.SolveMethod.setMinimumWidth(90)
         
         self.ApplyMethodButton = QtGui.QPushButton("Apply")
-        self.ApplyMethodButton.setMaximumHeight(35)
+        self.ApplyMethodButton.setMaximumHeight(25)
         self.ApplyMethodButton.setMaximumWidth(150)
         
         
@@ -244,7 +244,7 @@ class Interface(object):
         # Layouts & Display
         
         self.verticalLayoutWidget = QtGui.QWidget(Dialog)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(1080, 50, 468, 1021))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(980, 10, 468, 870))
         self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -279,7 +279,7 @@ class Interface(object):
         self.verticalLayout.addLayout(self.horizontalLayout_usemode)
               
         self.verticalLayout.addWidget(self.InterfButton)
-        spacerItem1 = QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        spacerItem1 = QtGui.QSpacerItem(20, 60, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem1)   
         self.verticalLayout.addWidget(self.PlaceBlocButton)
         self.verticalLayout.addItem(spacerItem)        
