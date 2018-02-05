@@ -55,6 +55,7 @@ class PieceCreationWindow():
         self.Compteur = QtGui.QLCDNumber()
         self.Compteur.display(self.compt)
         self.Compteur.setMinimumHeight(50)
+        self.Compteur.setSegmentStyle(2)
         
         #Top of screen
         self.upperPanel = QtGui.QHBoxLayout()
@@ -65,7 +66,7 @@ class PieceCreationWindow():
         self.upperPanel.addWidget(self.label_c)
         self.upperPanel.addWidget(self.Compteur)
         self.upperPanel.addWidget(self.buttonReset)
-        self.Compteur.setDigitCount(2)    
+        self.Compteur.setDigitCount(1)    
         self.Compteur.setDigitCount(8)
         self.Compteur.setMaximumHeight(50)
         
